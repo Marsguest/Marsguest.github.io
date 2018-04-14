@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="防火墙," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="content{:toc}  防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&amp;gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包 针对ICMP的过滤 最常用的ping指令使用ICM">
+<meta name="keywords" content="防火墙">
+<meta property="og:type" content="article">
+<meta property="og:title" content="防火墙系列（二）-----防火墙的主要技术之包过滤技术，状态检测技术">
+<meta property="og:url" content="http://yoursite.com/2018/04/06/2018-04-06-Firewall_skill_01/index.html">
+<meta property="og:site_name" content="Marsguest">
+<meta property="og:description" content="content{:toc}  防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&amp;gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包 针对ICMP的过滤 最常用的ping指令使用ICM">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-12T13:27:40.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="防火墙系列（二）-----防火墙的主要技术之包过滤技术，状态检测技术">
+<meta name="twitter:description" content="content{:toc}  防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&amp;gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包 针对ICMP的过滤 最常用的ping指令使用ICM">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/06/2018-04-06-Firewall_skill_01/"/>
+
+
+
+
+
+  <title>防火墙系列（二）-----防火墙的主要技术之包过滤技术，状态检测技术 | Marsguest</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Marsguest</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/06/2018-04-06-Firewall_skill_01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Marsguest">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Marsguest">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">防火墙系列（二）-----防火墙的主要技术之包过滤技术，状态检测技术</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T15:49:29+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/防火墙/" itemprop="url" rel="index">
+                    <span itemprop="name">防火墙</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>content<br>{:toc}</li>
+</ul>
+<h1 id="防火墙系列（二）—–防火墙的主要技术"><a href="#防火墙系列（二）—–防火墙的主要技术" class="headerlink" title="防火墙系列（二）—–防火墙的主要技术"></a>防火墙系列（二）—–防火墙的主要技术</h1><p>必备知识：TCP/IP基础</p>
+<h2 id="包过滤技术"><a href="#包过滤技术" class="headerlink" title="包过滤技术"></a>包过滤技术</h2><p>工作对象–&gt;数据包<br>防火墙要在数据包进入系统之前处理它<br>实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。</p>
+<h3 id="过滤对象"><a href="#过滤对象" class="headerlink" title="过滤对象"></a>过滤对象</h3><h4 id="针对IP的过滤"><a href="#针对IP的过滤" class="headerlink" title="针对IP的过滤"></a>针对IP的过滤</h4><p>查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包</p>
+<h4 id="针对ICMP的过滤"><a href="#针对ICMP的过滤" class="headerlink" title="针对ICMP的过滤"></a>针对ICMP的过滤</h4><ul>
+<li>最常用的ping指令使用ICMP查询报文，攻击者而可以利用这样的的报文或程序探测用户网络主机和设备的可达性，进而勾勒出用户网络的拓补结构；因此要阻止<strong>类型8</strong>回送请求ICMP报文进出用户网络；</li>
+<li>与类型8相对应的<strong>类型0</strong>回送应答报文也很值得关注，攻击者通过向目的主机发送多个类型8的报文是的服务器响应信息过多瘫痪，从而实现攻击的目的</li>
+<li><strong>类型5</strong>路由重定向报文，攻击者可以通过中间人攻击的方法，伪装成预期的接受者截获或者篡改正常的数据包，也可以将数据包导向至受其控制的位置网络。</li>
+<li>还有<strong>类型3</strong>目的不可达报文。</li>
+</ul>
+<h4 id="针对TCP过滤"><a href="#针对TCP过滤" class="headerlink" title="针对TCP过滤"></a>针对TCP过滤</h4><p>有两种<br>1.针对源端口或者目的端口的过滤，例如HTTP的80端口，对这些端口号进行过滤规则的设置，可以实现禁止内部用户访问指定网站。<br>2.对标志位过滤<br>两个标志位 SYN：建立连接   ACK：响应；<br>下面叙述TCP三次握手的标志位变化（A向B发起连接）</p>
+<p>（1）A发出连接请求时，它发出的报文SYN位为1而其他标志位为0，该报文携带发起者自行选择的一个通信的初始序号 ；</p>
+<p>（2）B接受这个连接请求时，返回一个连接应答报文。这个报文SYN为1而ACK位为1。这个报文不但携带A对通信初始序号的确认（加1操作），而且携带B自行选择的另一个通信初始序号，如果A拒绝连接请求，则返回的报文RST位置1；</p>
+<p>（3）A对B发回的B自行选择的通信初始序号进行确认（加1操作）作为希望接受的下一个报文的序号，ACK位置1；</p>
+<p><strong>利用TCP标志位进行过滤</strong>：除了在连接请求的过程之外，SYN位始终置0；只要通过对SYN=1的报文进行操作，就可以实现连接会话的控制、拒绝这些报文即可。</p>
+<h4 id="针对UDP过滤"><a href="#针对UDP过滤" class="headerlink" title="针对UDP过滤"></a>针对UDP过滤</h4><p>UDP基于无连接的服务，一个UDP用户数据包报文中携带了到达目的地所需的全部信息，不需要返回任何的确认，报文之间的关系难以确定，很难指定相应的过滤规则。<br>有效解决方法–&gt;动态包过滤技术</p>
+<h3 id="包过滤优点"><a href="#包过滤优点" class="headerlink" title="包过滤优点"></a>包过滤优点</h3><p>1.简单快速，只需在内联网络与外联网络之间的路由器上安装过滤模块即可</p>
+<p>2.对用户是透明的，不需安装特定的软件，不需要进行任何的培训</p>
+<p>3.检查规则相对简单耗时极短，执行效率非常高</p>
+<h3 id="包过滤缺点"><a href="#包过滤缺点" class="headerlink" title="包过滤缺点"></a>包过滤缺点</h3><p>1.思想简单，对信息处理能力有限，只能访问包头中的部分信息，不能理解通信的上下文；</p>
+<p>2.过滤规则增多时维护困难，规则之间的包含冲突关系复杂；</p>
+<p>3.控制层次较低，不能实现用户级的控制；<br>解决–&gt;动态包过滤；</p>
+<hr>
+<h2 id="状态检测技术"><a href="#状态检测技术" class="headerlink" title="状态检测技术"></a>状态检测技术</h2><h3 id="提出前景"><a href="#提出前景" class="headerlink" title="提出前景"></a>提出前景</h3><p>为了解决静态包过滤技术的各项缺点，提出这个概念、<br>可以根据实际情况动态的自动生成或删除安全过滤规则，不需要管理人员的手工设置。</p>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>根据连接的状态进行检查，当一个初始数据的报文到达防火墙时，首先检查该报文是否符合安全过滤规则的规定。如果符合，将这条连接记录下来并且添加允许这条连接通过的过滤规则，之后向目的地址转发报文。以后凡是属于这个连接的数据防火墙<strong>一律通过</strong>（双向的）。在通信结束后，防火墙将自动删除关于这条连接的过滤规则，主要工作在<strong>传输层</strong>。</p>
+<ul>
+<li><p>TCP：定义了多种状态，以状态信息为基础，结合相应的标志位信息，加上双方的IP地址和端口号，建立TCP的状态连接表来精确的跟踪监控、</p>
+</li>
+<li><p>UDP：无连接的模式，状态难以定义和追踪，伪状态连接  由于不知道结束状态，超时删除，对错误的处理，通过ICMP传递差错信息。</p>
+</li>
+<li><p>ICMP：无连接，超时删除，按照ICMP报文对称性，当属于同一连接的ICMP报文完成请求这一应答过程之后，即可将其从状态连接表中删除。</p>
+</li>
+</ul>
+<h3 id="状态检测优点"><a href="#状态检测优点" class="headerlink" title="状态检测优点"></a>状态检测优点</h3><p>1.安全性高于静态包过滤，状态检测机制可以区分发送方和接受方。</p>
+<p>2.提高效率，一开始对连接进行详细检查，之后添加规则通过，不用在同一连接执行重复的动作。</p>
+<h3 id="状态检测缺点"><a href="#状态检测缺点" class="headerlink" title="状态检测缺点"></a>状态检测缺点</h3><p>1.主要在网络层和传输层，对报文数据部分检查少，安全性有限。</p>
+<p>2.检查内容多，对防火墙性能要求高；</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/防火墙/" rel="tag"># 防火墙</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/06/2018-04-06-Firewall_definition/" rel="next" title="防火墙系列（一）-----何为防火墙">
+                <i class="fa fa-chevron-left"></i> 防火墙系列（一）-----何为防火墙
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/06/2018-04-06-Firewall_skill_02/" rel="prev" title="防火墙系列（三）-----防火墙的主要技术之代理技术">
+                防火墙系列（三）-----防火墙的主要技术之代理技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avator.jpg"
+                alt="Marsguest" />
+            
+              <p class="site-author-name" itemprop="name">Marsguest</p>
+              <p class="site-description motion-element" itemprop="description">Marsguest's Blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/marsguest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:marsguest@126.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#防火墙系列（二）—–防火墙的主要技术"><span class="nav-number">1.</span> <span class="nav-text">防火墙系列（二）—–防火墙的主要技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#包过滤技术"><span class="nav-number">1.1.</span> <span class="nav-text">包过滤技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤对象"><span class="nav-number">1.1.1.</span> <span class="nav-text">过滤对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#针对IP的过滤"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">针对IP的过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#针对ICMP的过滤"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">针对ICMP的过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#针对TCP过滤"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">针对TCP过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#针对UDP过滤"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">针对UDP过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包过滤优点"><span class="nav-number">1.1.2.</span> <span class="nav-text">包过滤优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包过滤缺点"><span class="nav-number">1.1.3.</span> <span class="nav-text">包过滤缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态检测技术"><span class="nav-number">1.2.</span> <span class="nav-text">状态检测技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提出前景"><span class="nav-number">1.2.1.</span> <span class="nav-text">提出前景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-number">1.2.2.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态检测优点"><span class="nav-number">1.2.3.</span> <span class="nav-text">状态检测优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态检测缺点"><span class="nav-number">1.2.4.</span> <span class="nav-text">状态检测缺点</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Marsguest</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="虚拟机," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：之后两种模式的配置都将在这个界面进行 NAT模式：通俗一点理解就是将你的电脑再次发成一个局域网，在上图VMnet8网卡后面对应的子网地址就是形成的局域网的子网地址，可以理解成你的主机开了热点，主机地址一般为192.168.xxx.1，然后你的虚拟机连接这个wifi.所以之后分到的ip都是在当前子网下的ip 通">
+<meta name="keywords" content="虚拟机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/2018-04-11-vmwareInternet/index.html">
+<meta property="og:site_name" content="Marsguest">
+<meta property="og:description" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：之后两种模式的配置都将在这个界面进行 NAT模式：通俗一点理解就是将你的电脑再次发成一个局域网，在上图VMnet8网卡后面对应的子网地址就是形成的局域网的子网地址，可以理解成你的主机开了热点，主机地址一般为192.168.xxx.1，然后你的虚拟机连接这个wifi.所以之后分到的ip都是在当前子网下的ip 通">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/2018041101.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018041102.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018041103.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018041104.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018041106.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018041107.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018041108.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018041109.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018041105.jpg">
+<meta property="og:updated_time" content="2018-04-14T06:01:33.606Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置">
+<meta name="twitter:description" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：之后两种模式的配置都将在这个界面进行 NAT模式：通俗一点理解就是将你的电脑再次发成一个局域网，在上图VMnet8网卡后面对应的子网地址就是形成的局域网的子网地址，可以理解成你的主机开了热点，主机地址一般为192.168.xxx.1，然后你的虚拟机连接这个wifi.所以之后分到的ip都是在当前子网下的ip 通">
+<meta name="twitter:image" content="http://yoursite.com/images/2018041101.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/2018-04-11-vmwareInternet/"/>
+
+
+
+
+
+  <title>vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置 | Marsguest</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Marsguest</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/2018-04-11-vmwareInternet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Marsguest">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Marsguest">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T19:19:33+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置"><a href="#vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置" class="headerlink" title="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置"></a>vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置</h1><p>首先打开虚拟网络编辑器：<br><img src="/images/2018041101.jpg" alt="这里写图片描述"><br><img src="/images/2018041102.jpg" alt="这里写图片描述"><br><br><br>之后两种模式的配置都将在这个界面进行</p>
+<h2 id="NAT模式："><a href="#NAT模式：" class="headerlink" title="NAT模式："></a>NAT模式：</h2><p>通俗一点理解就是将你的电脑再次发成一个局域网，在上图VMnet8网卡后面对应的子网地址就是形成的局域网的子网地址，可以理解成你的主机开了热点，主机地址一般为192.168.xxx.1，然后你的虚拟机连接这个wifi.所以之后分到的ip都是在当前子网下的ip</p>
+<p>通过NAT模式连接的虚拟机只是你电脑的内网操作，换句话说就是<strong>与你的主机在同一个局域网下的各个主机相对于你的虚拟机就是外部的主机，双方之间都无法访问</strong>。倘若你想让自己的虚拟机得到你主机所在局域网的ip，那就需要用到接下来说的桥接模式。</p>
+<h2 id="桥接模式："><a href="#桥接模式：" class="headerlink" title="桥接模式："></a>桥接模式：</h2><p>桥接模式是什么上面已经介绍清楚，这里重点讲解桥接模式的配置问题：</p>
+<h3 id="进入虚拟网络编辑器界面，点击更改设置："><a href="#进入虚拟网络编辑器界面，点击更改设置：" class="headerlink" title="进入虚拟网络编辑器界面，点击更改设置："></a>进入虚拟网络编辑器界面，点击更改设置：</h3><p><img src="/images/2018041103.jpg" alt="这里写图片描述"><br><img src="/images/2018041104.jpg" alt="这里写图片描述"></p>
+<hr>
+<h4 id="进行到这，可能会出现一个问题"><a href="#进行到这，可能会出现一个问题" class="headerlink" title="进行到这，可能会出现一个问题"></a>进行到这，可能会出现一个问题</h4><p><img src="/images/2018041106.jpg" alt="这里写图片描述"><br><br>出现如下问题的主要原因是安装vmware的时候网卡没有自动安装成功，此时你进入网络适配器界面可能不会出现vm的两个虚拟网卡<br><img src="/images/2018041107.jpg" alt="这里写图片描述"></p>
+<h5 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h5><ol>
+<li>卸载vmware workstations</li>
+<li>卸载那两个虚拟的网卡驱动（如果你有的话）<br><img src="/images/2018041108.jpg" alt="这里写图片描述"></li>
+<li>如果进行到这之后就重新去装vmware的话，安装完成后你会发现问题依旧，两个虚拟网卡本没有安装成功，出现这一问题的主要原因就是vmware在进行卸载的时候会存在大量的存留，以及注册表信息，这些信息会影响虚拟网卡的安装，解决方法是清理注册表垃圾，我用的是CCleaner，在如下界面扫描问题然后清理几次即可。<br><img src="/images/2018041109.jpg" alt="这里写图片描述"><br>4.之后重装vmware即可，虚拟网卡将正常显示出来。</li>
+</ol>
+<hr>
+<h3 id="之后讲解桥接网卡的选取"><a href="#之后讲解桥接网卡的选取" class="headerlink" title="之后讲解桥接网卡的选取"></a>之后讲解桥接网卡的选取</h3><p>笔记本至少含有两块网卡：<br>无线网卡：Inter（R）Dual Band WIreless<br>有线网卡：Realtak Pcle GBE Family Controller</p>
+<p>看你主机当前连接的是什么网络，选择相应的网卡即可<br><img src="/images/2018041105.jpg" alt="这里写图片描述"><br>虚拟网络编辑好后，将虚拟机网络设置成桥接模式（自动），即可上网。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/虚拟机/" rel="tag"># 虚拟机</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/11/2018-04-11-kaliTypewriting/" rel="next" title="（2018最新）Kali linux 安装中文输入法的方法">
+                <i class="fa fa-chevron-left"></i> （2018最新）Kali linux 安装中文输入法的方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avator.jpg"
+                alt="Marsguest" />
+            
+              <p class="site-author-name" itemprop="name">Marsguest</p>
+              <p class="site-description motion-element" itemprop="description">Marsguest's Blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/marsguest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:marsguest@126.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置"><span class="nav-number">1.</span> <span class="nav-text">vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NAT模式："><span class="nav-number">1.1.</span> <span class="nav-text">NAT模式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桥接模式："><span class="nav-number">1.2.</span> <span class="nav-text">桥接模式：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进入虚拟网络编辑器界面，点击更改设置："><span class="nav-number">1.2.1.</span> <span class="nav-text">进入虚拟网络编辑器界面，点击更改设置：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进行到这，可能会出现一个问题"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">进行到这，可能会出现一个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方法："><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">解决方法：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#之后讲解桥接网卡的选取"><span class="nav-number">1.2.2.</span> <span class="nav-text">之后讲解桥接网卡的选取</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Marsguest</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="jQuery," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：甚至有的时候表格的部分字段是可变的 本文主要解决的问题就是动态的拼接checkbox的value值由于我所面临的问题是作业数量字段可编辑，编辑完成后自动去后台修改数据库中的数据，而如果在刷新出这个表格的时候就定死checkbox的value的话，在改变作业数量字段时无法重新修正checkbox">
+<meta name="keywords" content="jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="由表格中同一行的部分值动态拼接checkbox的值">
+<meta property="og:url" content="http://yoursite.com/2018/04/07/2018-04-07-checkboxValue/index.html">
+<meta property="og:site_name" content="Marsguest">
+<meta property="og:description" content="由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：甚至有的时候表格的部分字段是可变的 本文主要解决的问题就是动态的拼接checkbox的value值由于我所面临的问题是作业数量字段可编辑，编辑完成后自动去后台修改数据库中的数据，而如果在刷新出这个表格的时候就定死checkbox的value的话，在改变作业数量字段时无法重新修正checkbox">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/2018040701.png">
+<meta property="og:image" content="http://yoursite.com/images/2018040702.png">
+<meta property="og:image" content="http://yoursite.com/images/2018040703.png">
+<meta property="og:updated_time" content="2018-04-14T06:00:45.414Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="由表格中同一行的部分值动态拼接checkbox的值">
+<meta name="twitter:description" content="由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：甚至有的时候表格的部分字段是可变的 本文主要解决的问题就是动态的拼接checkbox的value值由于我所面临的问题是作业数量字段可编辑，编辑完成后自动去后台修改数据库中的数据，而如果在刷新出这个表格的时候就定死checkbox的value的话，在改变作业数量字段时无法重新修正checkbox">
+<meta name="twitter:image" content="http://yoursite.com/images/2018040701.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/07/2018-04-07-checkboxValue/"/>
+
+
+
+
+
+  <title>由表格中同一行的部分值动态拼接checkbox的值 | Marsguest</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Marsguest</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/07/2018-04-07-checkboxValue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Marsguest">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Marsguest">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">由表格中同一行的部分值动态拼接checkbox的值</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T17:09:20+08:00">
+                2018-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="由表格中同一行的部分值动态拼接checkbox的值"><a href="#由表格中同一行的部分值动态拼接checkbox的值" class="headerlink" title="由表格中同一行的部分值动态拼接checkbox的值"></a>由表格中同一行的部分值动态拼接checkbox的值</h1><p>在实际制作网站的过程中，我们可能需要面对很多这样的表格：<br><img src="/images/2018040701.png" alt="这里写图片描述"><br><img src="/images/2018040702.png" alt="这里写图片描述"><br><br><br>甚至有的时候表格的部分字段是可变的<br><img src="/images/2018040703.png" alt="这里写图片描述"></p>
+<h2 id="本文主要解决的问题就是动态的拼接checkbox的value值"><a href="#本文主要解决的问题就是动态的拼接checkbox的value值" class="headerlink" title="本文主要解决的问题就是动态的拼接checkbox的value值"></a>本文主要解决的问题就是动态的拼接checkbox的value值</h2><p>由于我所面临的问题是作业数量字段可编辑，编辑完成后自动去后台修改数据库中的数据，而如果在刷新出这个表格的时候就定死checkbox的value的话，在改变作业数量字段时无法重新修正checkbox的value，换句话说就是<strong>checkbox的时效性</strong>被破坏。</p>
+<p>想出的解决方案有以下两种：</p>
+<ol>
+<li><p>在改变作业数量字段后立刻用AJAX异步地刷新界面，从而实现jsp重新从数据库中调取数据，利用相关的数据拼接checkbox的value</p>
+</li>
+<li><p>在进行选中这一操作时，动态的组装它的value，从而实现value值的实时性</p>
+</li>
+</ol>
+<p>综合对比两种方法我选择了<strong>第二种</strong>，主要原因是第一种需要重新构建sql语句进入数据库进行查找，当数据量巨大的时候，这么做会加重服务器的负荷，体现到用户这边就是卡顿，延迟。</p>
+<h2 id="jsp中定义表格各字段代码如下"><a href="#jsp中定义表格各字段代码如下" class="headerlink" title="jsp中定义表格各字段代码如下"></a>jsp中定义表格各字段代码如下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">out.println(&quot;&lt;tr&gt;&quot;);</span><br><span class="line">out.println(&quot;&lt;td&gt;&lt;input type=&apos;checkbox&apos;</span><br><span class="line"> name=&apos;ckBox&apos; class=&apos;ckBox&apos; onclick=changeValue(this)&gt;&lt;/td&gt;&quot;);</span><br><span class="line"> //建立checkbox代码</span><br><span class="line">out.println(&quot;&lt;td class=&apos;Snum&apos;&gt;&quot;+rs.getString(1)+&quot;&lt;/td&gt;&quot;);</span><br><span class="line">out.println(&quot;&lt;td&gt;&quot;+rs.getString(2)+&quot;&lt;/td&gt;&quot;);</span><br><span class="line">out.println(&quot;&lt;td&gt;&quot;+rs.getString(3)+&quot;&lt;/td&gt;&quot;);</span><br><span class="line">out.println(&quot;&lt;td class=&apos;Sscore&apos;&gt;&quot;+rs.getString(4)+&quot;&lt;/td&gt;&quot;);</span><br><span class="line">out.println(&quot;&lt;td class=&apos;Pnum&apos; onmouseover=&apos;addHand(this)&apos; onmouseout=&apos;delHand(this)&apos;onclick=updatePnum(this,&apos;&quot;+rs.getString(1)+&quot;&apos;,&apos;&quot;+rs.getString(6)+&quot;&apos;)&gt;&quot;+rs.getString(5)+&quot;&lt;/td&gt;&quot;);out.println(&quot;&lt;/tr&gt;&quot;);</span><br></pre></td></tr></table></figure>
+<p>大概解释一下，rs是ResultSet就是sql查询语句返回的结果集，rs.getString(i)就是对应列的值，最后一个最长的是作业数量可编辑的实现代码，偏离主题，这里先不用管</p>
+<hr>
+<h2 id="选中checkbox时的函数"><a href="#选中checkbox时的函数" class="headerlink" title="选中checkbox时的函数"></a>选中checkbox时的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function changeValue(obj)&#123;//根据ckBox所在行的值动态调整ckBox的value</span><br><span class="line">	var cid = $(&quot;#indexCid&quot;).text();	</span><br><span class="line">	var Snum = $(obj).parent().siblings(&quot;.Snum&quot;).text();</span><br><span class="line">	var Sscore = $(obj).parent().siblings(&quot;.Sscore&quot;).text();</span><br><span class="line">	var Pnum = $(obj).parent().siblings(&quot;.Pnum&quot;).text();</span><br><span class="line">	var newValue = cid+&quot;_&quot;+Snum+&quot;_&quot;+Sscore+&quot;_&quot;+Pnum;</span><br><span class="line">	$(obj).val(newValue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里obj先找到自己父节点，也就是input，之后找siblings，也就是自己同胞结点，通过类选择器在同胞结点中找到自己想要的与checkbox同一行的字段，然后text()，取出字段的值</p>
+<p>用所得到的信息拼接一个字符串，最后将checkbox的值通过<code>$(obj).val(newValue);</code> 更改</p>
+<p>说一下自己遇到的坑吧，一开始取同胞的代码是这样写的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Snum = $(obj).siblings(&quot;.Snum&quot;).text();</span><br></pre></td></tr></table></figure>
+<p>就这样一直取不到同一行其他字段的值，因为我一直以为checkbox是和其他td同一层的，之后细细分析这个代码，解决了问题。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/06/2018-04-06-Firewall_skill_02/" rel="next" title="防火墙系列（三）-----防火墙的主要技术之代理技术">
+                <i class="fa fa-chevron-left"></i> 防火墙系列（三）-----防火墙的主要技术之代理技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/11/2018-04-11-kaliTypewriting/" rel="prev" title="（2018最新）Kali linux 安装中文输入法的方法">
+                （2018最新）Kali linux 安装中文输入法的方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avator.jpg"
+                alt="Marsguest" />
+            
+              <p class="site-author-name" itemprop="name">Marsguest</p>
+              <p class="site-description motion-element" itemprop="description">Marsguest's Blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/marsguest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:marsguest@126.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#由表格中同一行的部分值动态拼接checkbox的值"><span class="nav-number">1.</span> <span class="nav-text">由表格中同一行的部分值动态拼接checkbox的值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文主要解决的问题就是动态的拼接checkbox的value值"><span class="nav-number">1.1.</span> <span class="nav-text">本文主要解决的问题就是动态的拼接checkbox的value值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsp中定义表格各字段代码如下"><span class="nav-number">1.2.</span> <span class="nav-text">jsp中定义表格各字段代码如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选中checkbox时的函数"><span class="nav-number">1.3.</span> <span class="nav-text">选中checkbox时的函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Marsguest</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
