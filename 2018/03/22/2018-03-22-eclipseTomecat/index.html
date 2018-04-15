@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,21 +86,21 @@
 
 
 
-<meta name="description" content="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题最近自学javaweb编程，在eclipse部署tomcat后新建web项目，发现自己新建的项目能在tomcat上运行但是无法再tomcat的根目录中找到整个项目文件。将新的项目添加到tomcat的webapps目录中的方法如下： 1.调到server视图中如果你已经将项目添加进了server，先将它remove掉 2.双击">
+<meta name="description" content="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题最近自学javaweb编程，在eclipse部署tomcat后新建web项目，发现自己新建的项目能在tomcat上运行但是无法再tomcat的根目录中找到整个项目文件。将新的项目添加到tomcat的webapps目录中的方法如下：">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题">
 <meta property="og:url" content="http://yoursite.com/2018/03/22/2018-03-22-eclipseTomecat/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题最近自学javaweb编程，在eclipse部署tomcat后新建web项目，发现自己新建的项目能在tomcat上运行但是无法再tomcat的根目录中找到整个项目文件。将新的项目添加到tomcat的webapps目录中的方法如下： 1.调到server视图中如果你已经将项目添加进了server，先将它remove掉 2.双击">
+<meta property="og:description" content="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题最近自学javaweb编程，在eclipse部署tomcat后新建web项目，发现自己新建的项目能在tomcat上运行但是无法再tomcat的根目录中找到整个项目文件。将新的项目添加到tomcat的webapps目录中的方法如下：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/2018032201.png">
 <meta property="og:image" content="http://yoursite.com/images/2018032202.png">
 <meta property="og:image" content="http://yoursite.com/images/2018032203.png">
-<meta property="og:updated_time" content="2018-04-14T05:56:16.712Z">
+<meta property="og:updated_time" content="2018-04-15T13:34:39.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题">
-<meta name="twitter:description" content="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题最近自学javaweb编程，在eclipse部署tomcat后新建web项目，发现自己新建的项目能在tomcat上运行但是无法再tomcat的根目录中找到整个项目文件。将新的项目添加到tomcat的webapps目录中的方法如下： 1.调到server视图中如果你已经将项目添加进了server，先将它remove掉 2.双击">
+<meta name="twitter:description" content="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题最近自学javaweb编程，在eclipse部署tomcat后新建web项目，发现自己新建的项目能在tomcat上运行但是无法再tomcat的根目录中找到整个项目文件。将新的项目添加到tomcat的webapps目录中的方法如下：">
 <meta name="twitter:image" content="http://yoursite.com/images/2018032201.png">
 
 
@@ -339,7 +346,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -361,8 +368,7 @@
       
 
       
-        <h1 id="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题"><a href="#关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题" class="headerlink" title="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题"></a>关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题</h1><p>最近自学javaweb编程，在eclipse部署tomcat后新建web项目，发现自己新建的项目能在tomcat上运行但是无法再tomcat的根目录中找到整个项目文件。将新的项目添加到tomcat的webapps目录中的方法如下：</p>
-<p>1.调到server视图中如果你已经将项目添加进了server，先将它remove掉</p>
+        <h1 id="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题"><a href="#关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题" class="headerlink" title="关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题"></a>关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题</h1><p>最近自学javaweb编程，在eclipse部署tomcat后新建web项目，发现自己新建的项目能在tomcat上运行但是无法再tomcat的根目录中找到整个项目文件。将新的项目添加到tomcat的webapps目录中的方法如下：<br><a id="more"></a><br>1.调到server视图中如果你已经将项目添加进了server，先将它remove掉</p>
 <p>2.双击server视图，进入server设置界面<br><img src="/images/2018032201.png" alt="这里写图片描述"><br><img src="/images/2018032202.png" alt="这里写图片描述"><br><strong>重点是将划红线的部分配置正确</strong><br>之后重新将项目在server上运行，这时你就会发现整个项目文件已经添加到了tamcat根目录的webapps文件夹下。</p>
 <p>另一个问题，eclipse无法自动将我们写的servlet的各种信息动态的添加到xml文件中，导致访问界面时出现404错误，常规的方法是手动的添加像这样的代码到xml文件中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">	&lt;servlet-name&gt;first&lt;/servlet-name&gt;</span><br><span class="line">	&lt;servlet-class&gt;FirstServlet&lt;/servlet-class&gt;</span><br><span class="line">&lt;/servlet&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">	&lt;servlet-name&gt;first&lt;/servlet-name&gt;</span><br><span class="line">	&lt;url-pattern&gt;/first.bin&lt;/url-pattern&gt;</span><br><span class="line">&lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
@@ -428,6 +434,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -589,25 +621,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -673,6 +691,8 @@
   
 
 
+  
+
 
 
 
@@ -711,6 +731,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -794,6 +819,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>

@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,20 +86,20 @@
 
 
 
-<meta name="description" content="Jsp中实现利用数据库中的数据动态拼接select的option动态拼接select标签本教程主要解决的问题是利用数据库中的数据动态的显示到下拉选框中，通过这个下拉选框的值动态的调整下一个下拉选框的选项。主要效果如下图：这四个选项是数据库中的数据当选中指定学期后，能够动态的加载第二个下拉框的内容，也就是当前学期开设的课程  第一个下拉框的具体实现这是第一个下拉框的select标签 12	&amp;lt;s">
+<meta name="description" content="Jsp中实现利用数据库中的数据动态拼接select的option动态拼接select标签本教程主要解决的问题是利用数据库中的数据动态的显示到下拉选框中，通过这个下拉选框的值动态的调整下一个下拉选框的选项。主要效果如下图：这四个选项是数据库中的数据当选中指定学期后，能够动态的加载第二个下拉框的内容，也就是当前学期开设的课程">
 <meta name="keywords" content="AJAX">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jsp中实现利用数据库中的数据动态拼接select的option">
 <meta property="og:url" content="http://yoursite.com/2018/04/01/2018-04-01-activeSelect/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="Jsp中实现利用数据库中的数据动态拼接select的option动态拼接select标签本教程主要解决的问题是利用数据库中的数据动态的显示到下拉选框中，通过这个下拉选框的值动态的调整下一个下拉选框的选项。主要效果如下图：这四个选项是数据库中的数据当选中指定学期后，能够动态的加载第二个下拉框的内容，也就是当前学期开设的课程  第一个下拉框的具体实现这是第一个下拉框的select标签 12	&amp;lt;s">
+<meta property="og:description" content="Jsp中实现利用数据库中的数据动态拼接select的option动态拼接select标签本教程主要解决的问题是利用数据库中的数据动态的显示到下拉选框中，通过这个下拉选框的值动态的调整下一个下拉选框的选项。主要效果如下图：这四个选项是数据库中的数据当选中指定学期后，能够动态的加载第二个下拉框的内容，也就是当前学期开设的课程">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/2018040101.png">
 <meta property="og:image" content="http://yoursite.com/images/2018040102.png">
-<meta property="og:updated_time" content="2018-04-14T06:00:03.592Z">
+<meta property="og:updated_time" content="2018-04-15T13:34:26.735Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jsp中实现利用数据库中的数据动态拼接select的option">
-<meta name="twitter:description" content="Jsp中实现利用数据库中的数据动态拼接select的option动态拼接select标签本教程主要解决的问题是利用数据库中的数据动态的显示到下拉选框中，通过这个下拉选框的值动态的调整下一个下拉选框的选项。主要效果如下图：这四个选项是数据库中的数据当选中指定学期后，能够动态的加载第二个下拉框的内容，也就是当前学期开设的课程  第一个下拉框的具体实现这是第一个下拉框的select标签 12	&amp;lt;s">
+<meta name="twitter:description" content="Jsp中实现利用数据库中的数据动态拼接select的option动态拼接select标签本教程主要解决的问题是利用数据库中的数据动态的显示到下拉选框中，通过这个下拉选框的值动态的调整下一个下拉选框的选项。主要效果如下图：这四个选项是数据库中的数据当选中指定学期后，能够动态的加载第二个下拉框的内容，也就是当前学期开设的课程">
 <meta name="twitter:image" content="http://yoursite.com/images/2018040101.png">
 
 
@@ -338,7 +345,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -361,6 +368,7 @@
 
       
         <h1 id="Jsp中实现利用数据库中的数据动态拼接select的option"><a href="#Jsp中实现利用数据库中的数据动态拼接select的option" class="headerlink" title="Jsp中实现利用数据库中的数据动态拼接select的option"></a>Jsp中实现利用数据库中的数据动态拼接select的option</h1><h2 id="动态拼接select标签"><a href="#动态拼接select标签" class="headerlink" title="动态拼接select标签"></a>动态拼接select标签</h2><p>本教程主要解决的问题是利用数据库中的数据动态的显示到下拉选框中，通过这个下拉选框的值动态的调整下一个下拉选框的选项。<br>主要效果如下图：<br><img src="/images/2018040101.png" alt="这里写图片描述"><br><strong>这四个选项是数据库中的数据</strong><br><img src="/images/2018040102.png" alt="这里写图片描述"><br><strong>当选中指定学期后，能够动态的加载第二个下拉框的内容，也就是当前学期开设的课程</strong></p>
+<a id="more"></a>
 <hr>
 <h3 id="第一个下拉框的具体实现"><a href="#第一个下拉框的具体实现" class="headerlink" title="第一个下拉框的具体实现"></a>第一个下拉框的具体实现</h3><p>这是第一个下拉框的select标签</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	&lt;select style=&quot;width:180px;&quot; id=&quot;semester&quot; </span><br><span class="line">name=&quot;semester&quot; onclick=&quot;showCourse(this.value)&quot;&gt;&lt;/select&gt;</span><br></pre></td></tr></table></figure>
@@ -446,6 +454,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -607,25 +641,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -691,6 +711,8 @@
   
 
 
+  
+
 
 
 
@@ -729,6 +751,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -812,6 +839,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>

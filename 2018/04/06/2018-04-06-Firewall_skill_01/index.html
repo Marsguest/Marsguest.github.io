@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,18 +86,18 @@
 
 
 
-<meta name="description" content="content{:toc}  防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&amp;gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包 针对ICMP的过滤 最常用的ping指令使用ICM">
+<meta name="description" content="content{:toc}  防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&amp;gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包">
 <meta name="keywords" content="防火墙">
 <meta property="og:type" content="article">
 <meta property="og:title" content="防火墙系列（二）-----防火墙的主要技术之包过滤技术，状态检测技术">
 <meta property="og:url" content="http://yoursite.com/2018/04/06/2018-04-06-Firewall_skill_01/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="content{:toc}  防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&amp;gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包 针对ICMP的过滤 最常用的ping指令使用ICM">
+<meta property="og:description" content="content{:toc}  防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&amp;gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T13:27:40.588Z">
+<meta property="og:updated_time" content="2018-04-15T13:34:13.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="防火墙系列（二）-----防火墙的主要技术之包过滤技术，状态检测技术">
-<meta name="twitter:description" content="content{:toc}  防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&amp;gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包 针对ICMP的过滤 最常用的ping指令使用ICM">
+<meta name="twitter:description" content="content{:toc}  防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&amp;gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包">
 
 
 
@@ -335,7 +342,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -362,7 +369,7 @@
 </ul>
 <h1 id="防火墙系列（二）—–防火墙的主要技术"><a href="#防火墙系列（二）—–防火墙的主要技术" class="headerlink" title="防火墙系列（二）—–防火墙的主要技术"></a>防火墙系列（二）—–防火墙的主要技术</h1><p>必备知识：TCP/IP基础</p>
 <h2 id="包过滤技术"><a href="#包过滤技术" class="headerlink" title="包过滤技术"></a>包过滤技术</h2><p>工作对象–&gt;数据包<br>防火墙要在数据包进入系统之前处理它<br>实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。</p>
-<h3 id="过滤对象"><a href="#过滤对象" class="headerlink" title="过滤对象"></a>过滤对象</h3><h4 id="针对IP的过滤"><a href="#针对IP的过滤" class="headerlink" title="针对IP的过滤"></a>针对IP的过滤</h4><p>查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包</p>
+<h3 id="过滤对象"><a href="#过滤对象" class="headerlink" title="过滤对象"></a>过滤对象</h3><h4 id="针对IP的过滤"><a href="#针对IP的过滤" class="headerlink" title="针对IP的过滤"></a>针对IP的过滤</h4><p>查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包<br><a id="more"></a></p>
 <h4 id="针对ICMP的过滤"><a href="#针对ICMP的过滤" class="headerlink" title="针对ICMP的过滤"></a>针对ICMP的过滤</h4><ul>
 <li>最常用的ping指令使用ICMP查询报文，攻击者而可以利用这样的的报文或程序探测用户网络主机和设备的可达性，进而勾勒出用户网络的拓补结构；因此要阻止<strong>类型8</strong>回送请求ICMP报文进出用户网络；</li>
 <li>与类型8相对应的<strong>类型0</strong>回送应答报文也很值得关注，攻击者通过向目的主机发送多个类型8的报文是的服务器响应信息过多瘫痪，从而实现攻击的目的</li>
@@ -456,6 +463,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -617,25 +650,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -701,6 +720,8 @@
   
 
 
+  
+
 
 
 
@@ -739,6 +760,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -822,6 +848,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>

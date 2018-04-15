@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,18 +86,18 @@
 
 
 
-<meta name="description" content="c++中常引用const int &amp;amp;a的介绍引用 引用：简单的讲就是某个变量的别名。对一个变量的“引用”的所有操作，实际上都是对其所代表的（原来的）变量的操作。  设有一个变量x，要给它起一个别名y，可以这样写：   12int x;	  // 定义变量x	int &amp;amp;y = x;// 声明y是一个浮点型变量的引用变量，它被初始化为x 声明后，使用x或y代表同一变量。在上述声明中，&amp;">
+<meta name="description" content="c++中常引用const int &amp;amp;a的介绍引用 引用：简单的讲就是某个变量的别名。对一个变量的“引用”的所有操作，实际上都是对其所代表的（原来的）变量的操作。">
 <meta name="keywords" content="C&#x2F;C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++中常引用const int &amp;a的介绍">
 <meta property="og:url" content="http://yoursite.com/2017/11/10/2017-11-10-C++/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="c++中常引用const int &amp;amp;a的介绍引用 引用：简单的讲就是某个变量的别名。对一个变量的“引用”的所有操作，实际上都是对其所代表的（原来的）变量的操作。  设有一个变量x，要给它起一个别名y，可以这样写：   12int x;	  // 定义变量x	int &amp;amp;y = x;// 声明y是一个浮点型变量的引用变量，它被初始化为x 声明后，使用x或y代表同一变量。在上述声明中，&amp;">
+<meta property="og:description" content="c++中常引用const int &amp;amp;a的介绍引用 引用：简单的讲就是某个变量的别名。对一个变量的“引用”的所有操作，实际上都是对其所代表的（原来的）变量的操作。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T05:55:43.538Z">
+<meta property="og:updated_time" content="2018-04-15T13:34:46.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++中常引用const int &amp;a的介绍">
-<meta name="twitter:description" content="c++中常引用const int &amp;amp;a的介绍引用 引用：简单的讲就是某个变量的别名。对一个变量的“引用”的所有操作，实际上都是对其所代表的（原来的）变量的操作。  设有一个变量x，要给它起一个别名y，可以这样写：   12int x;	  // 定义变量x	int &amp;amp;y = x;// 声明y是一个浮点型变量的引用变量，它被初始化为x 声明后，使用x或y代表同一变量。在上述声明中，&amp;">
+<meta name="twitter:description" content="c++中常引用const int &amp;amp;a的介绍引用 引用：简单的讲就是某个变量的别名。对一个变量的“引用”的所有操作，实际上都是对其所代表的（原来的）变量的操作。">
 
 
 
@@ -335,7 +342,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -358,10 +365,8 @@
 
       
         <h1 id="c-中常引用const-int-amp-a的介绍"><a href="#c-中常引用const-int-amp-a的介绍" class="headerlink" title="c++中常引用const int &amp;a的介绍"></a>c++中常引用const int &amp;a的介绍</h1><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
-<li><p>引用：简单的讲就是某个变量的别名。对一个变量的“引用”的所有操作，实际上都是对其所代表的（原来的）变量的操作。</p>
-</li>
-<li><p>设有一个变量x，要给它起一个别名y，可以这样写：</p>
-</li>
+<li>引用：简单的讲就是某个变量的别名。对一个变量的“引用”的所有操作，实际上都是对其所代表的（原来的）变量的操作。<a id="more"></a></li>
+<li>设有一个变量x，要给它起一个别名y，可以这样写：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x;	  // 定义变量x	</span><br><span class="line">int &amp;y = x;// 声明y是一个浮点型变量的引用变量，它被初始化为x</span><br></pre></td></tr></table></figure>
 <p>声明后，使用x或y代表同一变量。在上述声明中，&amp;是“引用声明符”长相与取地址符相同</p>
@@ -445,6 +450,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -606,25 +637,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -690,6 +707,8 @@
   
 
 
+  
+
 
 
 
@@ -728,6 +747,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -811,6 +835,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>

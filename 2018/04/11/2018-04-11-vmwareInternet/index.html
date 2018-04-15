@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,13 +86,13 @@
 
 
 
-<meta name="description" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：之后两种模式的配置都将在这个界面进行 NAT模式：通俗一点理解就是将你的电脑再次发成一个局域网，在上图VMnet8网卡后面对应的子网地址就是形成的局域网的子网地址，可以理解成你的主机开了热点，主机地址一般为192.168.xxx.1，然后你的虚拟机连接这个wifi.所以之后分到的ip都是在当前子网下的ip 通">
+<meta name="description" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：">
 <meta name="keywords" content="虚拟机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置">
 <meta property="og:url" content="http://yoursite.com/2018/04/11/2018-04-11-vmwareInternet/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：之后两种模式的配置都将在这个界面进行 NAT模式：通俗一点理解就是将你的电脑再次发成一个局域网，在上图VMnet8网卡后面对应的子网地址就是形成的局域网的子网地址，可以理解成你的主机开了热点，主机地址一般为192.168.xxx.1，然后你的虚拟机连接这个wifi.所以之后分到的ip都是在当前子网下的ip 通">
+<meta property="og:description" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/2018041101.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018041102.jpg">
@@ -96,10 +103,10 @@
 <meta property="og:image" content="http://yoursite.com/images/2018041108.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018041109.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018041105.jpg">
-<meta property="og:updated_time" content="2018-04-14T06:01:33.606Z">
+<meta property="og:updated_time" content="2018-04-15T13:33:41.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置">
-<meta name="twitter:description" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：之后两种模式的配置都将在这个界面进行 NAT模式：通俗一点理解就是将你的电脑再次发成一个局域网，在上图VMnet8网卡后面对应的子网地址就是形成的局域网的子网地址，可以理解成你的主机开了热点，主机地址一般为192.168.xxx.1，然后你的虚拟机连接这个wifi.所以之后分到的ip都是在当前子网下的ip 通">
+<meta name="twitter:description" content="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：">
 <meta name="twitter:image" content="http://yoursite.com/images/2018041101.jpg">
 
 
@@ -345,7 +352,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -367,7 +374,7 @@
       
 
       
-        <h1 id="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置"><a href="#vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置" class="headerlink" title="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置"></a>vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置</h1><p>首先打开虚拟网络编辑器：<br><img src="/images/2018041101.jpg" alt="这里写图片描述"><br><img src="/images/2018041102.jpg" alt="这里写图片描述"><br><br><br>之后两种模式的配置都将在这个界面进行</p>
+        <h1 id="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置"><a href="#vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置" class="headerlink" title="vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置"></a>vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置</h1><p>首先打开虚拟网络编辑器：<br><img src="/images/2018041101.jpg" alt="这里写图片描述"><br><a id="more"></a><br><img src="/images/2018041102.jpg" alt="这里写图片描述"><br><br><br>之后两种模式的配置都将在这个界面进行</p>
 <h2 id="NAT模式："><a href="#NAT模式：" class="headerlink" title="NAT模式："></a>NAT模式：</h2><p>通俗一点理解就是将你的电脑再次发成一个局域网，在上图VMnet8网卡后面对应的子网地址就是形成的局域网的子网地址，可以理解成你的主机开了热点，主机地址一般为192.168.xxx.1，然后你的虚拟机连接这个wifi.所以之后分到的ip都是在当前子网下的ip</p>
 <p>通过NAT模式连接的虚拟机只是你电脑的内网操作，换句话说就是<strong>与你的主机在同一个局域网下的各个主机相对于你的虚拟机就是外部的主机，双方之间都无法访问</strong>。倘若你想让自己的虚拟机得到你主机所在局域网的ip，那就需要用到接下来说的桥接模式。</p>
 <h2 id="桥接模式："><a href="#桥接模式：" class="headerlink" title="桥接模式："></a>桥接模式：</h2><p>桥接模式是什么上面已经介绍清楚，这里重点讲解桥接模式的配置问题：</p>
@@ -438,6 +445,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -599,25 +632,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -683,6 +702,8 @@
   
 
 
+  
+
 
 
 
@@ -721,6 +742,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -804,6 +830,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>

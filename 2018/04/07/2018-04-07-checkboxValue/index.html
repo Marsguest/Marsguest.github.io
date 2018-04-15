@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,21 +86,21 @@
 
 
 
-<meta name="description" content="由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：甚至有的时候表格的部分字段是可变的 本文主要解决的问题就是动态的拼接checkbox的value值由于我所面临的问题是作业数量字段可编辑，编辑完成后自动去后台修改数据库中的数据，而如果在刷新出这个表格的时候就定死checkbox的value的话，在改变作业数量字段时无法重新修正checkbox">
+<meta name="description" content="由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：">
 <meta name="keywords" content="jQuery">
 <meta property="og:type" content="article">
 <meta property="og:title" content="由表格中同一行的部分值动态拼接checkbox的值">
 <meta property="og:url" content="http://yoursite.com/2018/04/07/2018-04-07-checkboxValue/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：甚至有的时候表格的部分字段是可变的 本文主要解决的问题就是动态的拼接checkbox的value值由于我所面临的问题是作业数量字段可编辑，编辑完成后自动去后台修改数据库中的数据，而如果在刷新出这个表格的时候就定死checkbox的value的话，在改变作业数量字段时无法重新修正checkbox">
+<meta property="og:description" content="由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/2018040701.png">
 <meta property="og:image" content="http://yoursite.com/images/2018040702.png">
 <meta property="og:image" content="http://yoursite.com/images/2018040703.png">
-<meta property="og:updated_time" content="2018-04-14T06:00:45.414Z">
+<meta property="og:updated_time" content="2018-04-15T13:34:00.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="由表格中同一行的部分值动态拼接checkbox的值">
-<meta name="twitter:description" content="由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：甚至有的时候表格的部分字段是可变的 本文主要解决的问题就是动态的拼接checkbox的value值由于我所面临的问题是作业数量字段可编辑，编辑完成后自动去后台修改数据库中的数据，而如果在刷新出这个表格的时候就定死checkbox的value的话，在改变作业数量字段时无法重新修正checkbox">
+<meta name="twitter:description" content="由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：">
 <meta name="twitter:image" content="http://yoursite.com/images/2018040701.png">
 
 
@@ -339,7 +346,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -361,7 +368,7 @@
       
 
       
-        <h1 id="由表格中同一行的部分值动态拼接checkbox的值"><a href="#由表格中同一行的部分值动态拼接checkbox的值" class="headerlink" title="由表格中同一行的部分值动态拼接checkbox的值"></a>由表格中同一行的部分值动态拼接checkbox的值</h1><p>在实际制作网站的过程中，我们可能需要面对很多这样的表格：<br><img src="/images/2018040701.png" alt="这里写图片描述"><br><img src="/images/2018040702.png" alt="这里写图片描述"><br><br><br>甚至有的时候表格的部分字段是可变的<br><img src="/images/2018040703.png" alt="这里写图片描述"></p>
+        <h1 id="由表格中同一行的部分值动态拼接checkbox的值"><a href="#由表格中同一行的部分值动态拼接checkbox的值" class="headerlink" title="由表格中同一行的部分值动态拼接checkbox的值"></a>由表格中同一行的部分值动态拼接checkbox的值</h1><p>在实际制作网站的过程中，我们可能需要面对很多这样的表格：<br><img src="/images/2018040701.png" alt="这里写图片描述"><br><img src="/images/2018040702.png" alt="这里写图片描述"><br><br><br><a id="more"></a><br>甚至有的时候表格的部分字段是可变的<br><img src="/images/2018040703.png" alt="这里写图片描述"></p>
 <h2 id="本文主要解决的问题就是动态的拼接checkbox的value值"><a href="#本文主要解决的问题就是动态的拼接checkbox的value值" class="headerlink" title="本文主要解决的问题就是动态的拼接checkbox的value值"></a>本文主要解决的问题就是动态的拼接checkbox的value值</h2><p>由于我所面临的问题是作业数量字段可编辑，编辑完成后自动去后台修改数据库中的数据，而如果在刷新出这个表格的时候就定死checkbox的value的话，在改变作业数量字段时无法重新修正checkbox的value，换句话说就是<strong>checkbox的时效性</strong>被破坏。</p>
 <p>想出的解决方案有以下两种：</p>
 <ol>
@@ -440,6 +447,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -601,25 +634,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -685,6 +704,8 @@
   
 
 
+  
+
 
 
 
@@ -723,6 +744,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -806,6 +832,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>

@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -88,7 +95,7 @@
 <meta property="og:description" content="防火墙系列（一）—–何为防火墙防火墙是什么（简单解释下内联网络和外联网络内联网络类似于局域网是指某个企业或者单位内部交互的网络，外联网络就是外部的Internet）  部署在用户内联网络和外联网络之间的一道屏障，一切内外联网络交换的数据都应该通过防火墙设备。以预先定义好的安全规则为标准，防火墙将对通过他的数据进行安全监测，符合安全规则的数据流将准予放行，不符合规则的数据流将被阻隔。 防火墙系统包括">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/2018040601.jpg">
-<meta property="og:updated_time" content="2018-04-14T06:00:26.863Z">
+<meta property="og:updated_time" content="2018-04-15T13:34:20.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="防火墙系列（一）-----何为防火墙">
 <meta name="twitter:description" content="防火墙系列（一）—–何为防火墙防火墙是什么（简单解释下内联网络和外联网络内联网络类似于局域网是指某个企业或者单位内部交互的网络，外联网络就是外部的Internet）  部署在用户内联网络和外联网络之间的一道屏障，一切内外联网络交换的数据都应该通过防火墙设备。以预先定义好的安全规则为标准，防火墙将对通过他的数据进行安全监测，符合安全规则的数据流将准予放行，不符合规则的数据流将被阻隔。 防火墙系统包括">
@@ -337,7 +344,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -363,7 +370,8 @@
 <ul>
 <li>部署在用户内联网络和外联网络之间的一道屏障，一切内外联网络交换的数据都应该通过防火墙设备。以预先定义好的安全规则为标准，防火墙将对通过他的数据进行安全监测，符合安全规则的数据流将准予放行，不符合规则的数据流将被阻隔。</li>
 <li>防火墙系统包括硬件设备，相关的软件代码和安全策略。</li>
-<li>广义上讲，防火墙是隔离在内联网络和外联网络之间的一个防御系统。双向数据流都将经过防火墙。<br><strong>重点–&gt;访问控制策略</strong><br>控制内联主机如何访问外联网络以及外联主机如何访问内联网络。<br>具体体现为防火墙的过滤规则。<h3 id="防火墙的物理位置"><a href="#防火墙的物理位置" class="headerlink" title="防火墙的物理位置"></a>防火墙的物理位置</h3><ul>
+<li>广义上讲，防火墙是隔离在内联网络和外联网络之间的一个防御系统。双向数据流都将经过防火墙。<br><strong>重点–&gt;访问控制策略</strong><a id="more"></a>
+控制内联主机如何访问外联网络以及外联主机如何访问内联网络。<br>具体体现为防火墙的过滤规则。<h3 id="防火墙的物理位置"><a href="#防火墙的物理位置" class="headerlink" title="防火墙的物理位置"></a>防火墙的物理位置</h3><ul>
 <li>从具体实现的角度来看，防火墙有一个独立的进程或者一组紧密联系的进程构成。它运行于路由器，堡垒主机或者任何提供网络安全的设备组合上。</li>
 <li>对于个人防火墙来说，防火墙一般是指安装在单台主机硬盘上的软件系统。<h3 id="防火墙的逻辑位置"><a href="#防火墙的逻辑位置" class="headerlink" title="防火墙的逻辑位置"></a>防火墙的逻辑位置</h3><table><br><tr><th>ISO 7层模型</th><th>防火墙级别</th></tr><br><tr><td>应用层</td><td>网关级</td></tr><br><tr><td>表示层</td><td>—</td></tr><br><tr><td>会话层</td><td>—</td></tr><br><tr><td>传输层</td><td>电路级</td></tr><br><tr><td>网络层</td><td>路由器级</td></tr><br><tr><td>数据链路层</td><td>网桥级</td></tr><br><tr><td>物理层</td><td>中继器级</td></tr><br></table><h2 id="防火墙的理论特性和实际功能"><a href="#防火墙的理论特性和实际功能" class="headerlink" title="防火墙的理论特性和实际功能"></a>防火墙的理论特性和实际功能</h2>理论上讲是分离器，限制器和分析器。实现4类控制功能：<br>1.方向控制：控制特定的服务请求通过它的方向<br>2.服务控制：控制用户可以访问的网络服务类型。<br>3.行为控制：控制使用特定服务的方式。<br>4.用户控制：控制可以进行网络访问的用户。（较复杂，涉及到报文中的数据部分）<br><img src="/images/2018040601.jpg" alt="这里写图片描述"></li>
 </ul>
@@ -435,6 +443,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -596,25 +630,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -680,6 +700,8 @@
   
 
 
+  
+
 
 
 
@@ -718,6 +740,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -801,6 +828,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>

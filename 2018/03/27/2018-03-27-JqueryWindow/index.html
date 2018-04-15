@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,19 +86,19 @@
 
 
 
-<meta name="description" content="jQuery实现悬浮窗口最近有这样的一个需求就是在网页上实现点击特定的控件实现弹出窗口进行一些表单的提交之类。最终实现的大致效果如下：  首先，应该明确一点，即便是弹出窗口，也是通过控制div的display属性实现的。具体步骤分为以下三点：  1. 建立窗口的div，注意position设置成absolute，这样以后可以自己调整它在网页上的位置。 2.建立弹出窗口时背景为黑色的div，通过调整">
+<meta name="description" content="jQuery实现悬浮窗口最近有这样的一个需求就是在网页上实现点击特定的控件实现弹出窗口进行一些表单的提交之类。最终实现的大致效果如下：  首先，应该明确一点，即便是弹出窗口，也是通过控制div的display属性实现的。具体步骤分为以下三点：">
 <meta name="keywords" content="jQuery">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery实现悬浮窗口">
 <meta property="og:url" content="http://yoursite.com/2018/03/27/2018-03-27-JqueryWindow/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="jQuery实现悬浮窗口最近有这样的一个需求就是在网页上实现点击特定的控件实现弹出窗口进行一些表单的提交之类。最终实现的大致效果如下：  首先，应该明确一点，即便是弹出窗口，也是通过控制div的display属性实现的。具体步骤分为以下三点：  1. 建立窗口的div，注意position设置成absolute，这样以后可以自己调整它在网页上的位置。 2.建立弹出窗口时背景为黑色的div，通过调整">
+<meta property="og:description" content="jQuery实现悬浮窗口最近有这样的一个需求就是在网页上实现点击特定的控件实现弹出窗口进行一些表单的提交之类。最终实现的大致效果如下：  首先，应该明确一点，即便是弹出窗口，也是通过控制div的display属性实现的。具体步骤分为以下三点：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/2018032701.png">
-<meta property="og:updated_time" content="2018-04-14T06:00:09.445Z">
+<meta property="og:updated_time" content="2018-04-15T13:34:33.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery实现悬浮窗口">
-<meta name="twitter:description" content="jQuery实现悬浮窗口最近有这样的一个需求就是在网页上实现点击特定的控件实现弹出窗口进行一些表单的提交之类。最终实现的大致效果如下：  首先，应该明确一点，即便是弹出窗口，也是通过控制div的display属性实现的。具体步骤分为以下三点：  1. 建立窗口的div，注意position设置成absolute，这样以后可以自己调整它在网页上的位置。 2.建立弹出窗口时背景为黑色的div，通过调整">
+<meta name="twitter:description" content="jQuery实现悬浮窗口最近有这样的一个需求就是在网页上实现点击特定的控件实现弹出窗口进行一些表单的提交之类。最终实现的大致效果如下：  首先，应该明确一点，即便是弹出窗口，也是通过控制div的display属性实现的。具体步骤分为以下三点：">
 <meta name="twitter:image" content="http://yoursite.com/images/2018032701.png">
 
 
@@ -337,7 +344,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -361,8 +368,7 @@
       
         <h1 id="jQuery实现悬浮窗口"><a href="#jQuery实现悬浮窗口" class="headerlink" title="jQuery实现悬浮窗口"></a>jQuery实现悬浮窗口</h1><p>最近有这样的一个需求就是在网页上实现点击特定的控件实现弹出窗口进行一些表单的提交之类。最终实现的大致效果如下：</p>
 <p><img src="/images/2018032701.png" alt="这里写图片描述"></p>
-<p>首先，应该明确一点，即便是弹出窗口，也是通过控制div的display属性实现的。具体步骤分为以下三点：</p>
-<p> <strong>1. 建立窗口的div，注意position设置成absolute，这样以后可以自己调整它在网页上的位置。</strong></p>
+<p>首先，应该明确一点，即便是弹出窗口，也是通过控制div的display属性实现的。具体步骤分为以下三点：<br><a id="more"></a><br> <strong>1. 建立窗口的div，注意position设置成absolute，这样以后可以自己调整它在网页上的位置。</strong></p>
 <p><strong>2.建立弹出窗口时背景为黑色的div，通过调整div的重叠属性z-index，从而实现黑色背景遮挡之前的主界面，然后将窗口div设置到黑色背景之上。</strong></p>
 <p><strong>3.设置关闭按钮，点击关闭后隐藏背景和div窗口，显示主界面。</strong></p>
 <hr>
@@ -435,6 +441,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -596,25 +628,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -680,6 +698,8 @@
   
 
 
+  
+
 
 
 
@@ -718,6 +738,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -801,6 +826,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>

@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,22 +86,22 @@
 
 
 
-<meta name="description" content="（2018最新）Kali linux 安装中文输入法的方法回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法： 前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络） 1.">
+<meta name="description" content="（2018最新）Kali linux 安装中文输入法的方法回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法： 前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络）">
 <meta name="keywords" content="Kali">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（2018最新）Kali linux 安装中文输入法的方法">
 <meta property="og:url" content="http://yoursite.com/2018/04/11/2018-04-11-kaliTypewriting/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="（2018最新）Kali linux 安装中文输入法的方法回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法： 前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络） 1.">
+<meta property="og:description" content="（2018最新）Kali linux 安装中文输入法的方法回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法： 前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络）">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/2018041110.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018041111.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018041112.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018041113.jpg">
-<meta property="og:updated_time" content="2018-04-14T06:01:04.857Z">
+<meta property="og:updated_time" content="2018-04-15T13:33:51.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（2018最新）Kali linux 安装中文输入法的方法">
-<meta name="twitter:description" content="（2018最新）Kali linux 安装中文输入法的方法回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法： 前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络） 1.">
+<meta name="twitter:description" content="（2018最新）Kali linux 安装中文输入法的方法回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法： 前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络）">
 <meta name="twitter:image" content="http://yoursite.com/images/2018041110.jpg">
 
 
@@ -340,7 +347,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -363,8 +370,7 @@
 
       
         <h1 id="（2018最新）Kali-linux-安装中文输入法的方法"><a href="#（2018最新）Kali-linux-安装中文输入法的方法" class="headerlink" title="（2018最新）Kali linux 安装中文输入法的方法"></a>（2018最新）Kali linux 安装中文输入法的方法</h1><p>回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。<br>下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法：</p>
-<p><strong>前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。</strong><br><br><br>（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络）</p>
-<p>1.首先，设置源，我这里只设置一个阿里云的源，设置太多没用</p>
+<p><strong>前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。</strong><br><br><br>（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络）<br><a id="more"></a><br>1.首先，设置源，我这里只设置一个阿里云的源，设置太多没用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
 <p>2.在终端键入如下指令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
@@ -442,6 +448,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -603,25 +635,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -687,6 +705,8 @@
   
 
 
+  
+
 
 
 
@@ -725,6 +745,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -808,6 +833,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>

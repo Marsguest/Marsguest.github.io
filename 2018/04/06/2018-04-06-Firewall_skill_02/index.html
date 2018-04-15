@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -87,7 +94,7 @@
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
 <meta property="og:description" content="content{:toc}  防火墙系列（三）—–防火墙的主要技术代理技术代理技术概述代理技术的防火墙用代理服务器的方式运行于内联网络和外联网络之间，在应用层实现安全控制功能，起到内联网络和外联网络之间应用服务的转接作用。 1.代理的执行流程（两种情况）1.代理服务器监听内联网络中主机的请求，当请求到达代理服务器后，代理服务器根据安全策略对数据包的首部和数据部分信息进行检查，检查之后将内联网络中">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T13:27:40.589Z">
+<meta property="og:updated_time" content="2018-04-15T13:34:07.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="防火墙系列（三）-----防火墙的主要技术之代理技术">
 <meta name="twitter:description" content="content{:toc}  防火墙系列（三）—–防火墙的主要技术代理技术代理技术概述代理技术的防火墙用代理服务器的方式运行于内联网络和外联网络之间，在应用层实现安全控制功能，起到内联网络和外联网络之间应用服务的转接作用。 1.代理的执行流程（两种情况）1.代理服务器监听内联网络中主机的请求，当请求到达代理服务器后，代理服务器根据安全策略对数据包的首部和数据部分信息进行检查，检查之后将内联网络中">
@@ -335,7 +342,7 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量：
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -361,8 +368,7 @@
 <li>content<br>{:toc}</li>
 </ul>
 <h1 id="防火墙系列（三）—–防火墙的主要技术"><a href="#防火墙系列（三）—–防火墙的主要技术" class="headerlink" title="防火墙系列（三）—–防火墙的主要技术"></a>防火墙系列（三）—–防火墙的主要技术</h1><h2 id="代理技术"><a href="#代理技术" class="headerlink" title="代理技术"></a>代理技术</h2><h3 id="代理技术概述"><a href="#代理技术概述" class="headerlink" title="代理技术概述"></a>代理技术概述</h3><p>代理技术的防火墙用代理服务器的方式运行于内联网络和外联网络之间，在应用层实现安全控制功能，起到内联网络和外联网络之间应用服务的转接作用。</p>
-<h4 id="1-代理的执行流程（两种情况）"><a href="#1-代理的执行流程（两种情况）" class="headerlink" title="1.代理的执行流程（两种情况）"></a>1.代理的执行流程（两种情况）</h4><p>1.代理服务器监听内联网络中主机的请求，当请求到达代理服务器后，代理服务器根据安全策略对数据包的首部和数据部分信息进行检查，检查之后将内联网络中的主机源地址改为自己的地址之后将这个数据包发给外部的目的主机，这样外部的主机接到的信息是来自于代理服务器而不是源主机。目的主机应答的数据包也将发送到代理服务器，经过代理服务器检查允许通过后，代理服务器将数据包的目的地址改为内联主机的地址，之后发往目的主机。<br>类似于在内联网络和外联网络之间设置一个中转，外联网络并不清楚内联网络的拓补结构。</p>
-<p>2.内部的主机只接受代理服务器的信息而不接收任何外部地址主机发来的信息，外部主机只能讲信息发往代理服务器，之后由代理服务器将信息转发给内联网路中的主机。代理服务器负责监控整个通信过程来保证通信过程的安全性。</p>
+<h4 id="1-代理的执行流程（两种情况）"><a href="#1-代理的执行流程（两种情况）" class="headerlink" title="1.代理的执行流程（两种情况）"></a>1.代理的执行流程（两种情况）</h4><p>1.代理服务器监听内联网络中主机的请求，当请求到达代理服务器后，代理服务器根据安全策略对数据包的首部和数据部分信息进行检查，检查之后将内联网络中的主机源地址改为自己的地址之后将这个数据包发给外部的目的主机，这样外部的主机接到的信息是来自于代理服务器而不是源主机。目的主机应答的数据包也将发送到代理服务器，经过代理服务器检查允许通过后，代理服务器将数据包的目的地址改为内联主机的地址，之后发往目的主机。<br>类似于在内联网络和外联网络之间设置一个中转，外联网络并不清楚内联网络的拓补结构。<br><a id="more"></a><br>2.内部的主机只接受代理服务器的信息而不接收任何外部地址主机发来的信息，外部主机只能讲信息发往代理服务器，之后由代理服务器将信息转发给内联网路中的主机。代理服务器负责监控整个通信过程来保证通信过程的安全性。</p>
 <h4 id="2-处理代码"><a href="#2-处理代码" class="headerlink" title="2.处理代码"></a>2.处理代码</h4><p>代理技术是通过在代理服务器上安装特殊的代理代码来实现的。代理程序可以只有服务器端的代码，也可以同时有server和client端代码。</p>
 <p><strong>客户端代码部署有两种方式：</strong></p>
 <p>1.在用户主机安装特制的客户端代理服务程序，这个客户端程序通过与服务端程序相连接为用户提供网络访问服务</p>
@@ -455,6 +461,32 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -616,25 +648,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
+  
   <span class="author" itemprop="copyrightHolder">Marsguest</span>
 
   
 </div>
-
-
-  <div class="powered-by">此站记录我学习的过程</div>
-
-
-
-  <span class="post-meta-divider"></span>
-
-
-
-  <div class="theme-info"></div>
-
 
 
 
@@ -700,6 +718,8 @@
   
 
 
+  
+
 
 
 
@@ -738,6 +758,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -821,6 +846,10 @@
   
 
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 </body>
 </html>
