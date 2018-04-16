@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/images/2018041111.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018041112.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018041113.jpg">
-<meta property="og:updated_time" content="2018-04-15T13:33:51.421Z">
+<meta property="og:updated_time" content="2018-04-16T09:52:56.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（2018最新）Kali linux 安装中文输入法的方法">
 <meta name="twitter:description" content="（2018最新）Kali linux 安装中文输入法的方法回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法： 前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络）">
@@ -370,8 +370,9 @@
 
       
         <h1 id="（2018最新）Kali-linux-安装中文输入法的方法"><a href="#（2018最新）Kali-linux-安装中文输入法的方法" class="headerlink" title="（2018最新）Kali linux 安装中文输入法的方法"></a>（2018最新）Kali linux 安装中文输入法的方法</h1><p>回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。<br>下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法：</p>
-<p><strong>前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。</strong><br><br><br>（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络）<br><a id="more"></a><br>1.首先，设置源，我这里只设置一个阿里云的源，设置太多没用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
+<p><strong>前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。</strong><br><br><br>（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络）<br><a id="more"></a><br>1.首先，设置源，在终端中键入如下代码，打开源设置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">leafpad /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>我这里只设置一个阿里云的源，设置太多没用<br>将source.list文件清空，只保存如下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure></p>
 <p>2.在终端键入如下指令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
 <p>如果你是新安装的kali系统，由于系统可能比较陈旧，可能会出现下图所示的<strong>数字签名错误</strong>：</p>
