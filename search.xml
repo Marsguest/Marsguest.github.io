@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[独立博客搭建（一）----- github pages + hexo 搭建属于自己的专属博客]]></title>
+    <url>%2F2018%2F04%2F16%2F2018-04-16-Blog01%2F</url>
+    <content type="text"><![CDATA[独立博客搭建（一）—– github pages + hexo 搭建属于自己的专属博客写在最前你为什么要写博客？这里用我的博客关于中的部分文字来解释下 写博客的本意首先是为了记录自己学习生活中遇到的问题和解决问题的方法，这样以后遇到同类问题或者是与之相似的问题就可以回来翻翻博客寻找答案。其次记录博客的过程其实是二次学习的过程。在写博客的过程中，能及时对自己学过的知识进行复习和总结，加深自己对当前问题的理解 再次就是希望自己解决问题的过程对他人能够有所帮助。因为自己也常年混迹各大博客圈，明白一篇好的技术博客能给人提供很多思路。我也希望我的博文能够给大家提供不一样的思路。 如果你也有一颗爱分享的心，希望自己的博客能为别人提供哪怕是一点点的帮助，请往下看 首先你得爱折腾，搭建博客这个事情说容易也不太容易，需要你有足够的耐心，ok，开始 GitHub Pages 是什么GitHub Pages 是通过我们网站托管和发布的公开网页，它是免费的。GitHub Pages上所有的代码是开源的无法进行后端的操作，所以要用到后面对的hexo框架。GitHub Pages 是通过 HTTP 服务的，不是 HTTPS，所以你不应该使用它处理敏感的事务，像发送密码或者信用卡号码。 注册github点击这里进入github官网，注册账号 创建仓库如果你还不了解仓库是什么的话，后续我会在我的博客 中具体讲解github得到用法创建仓库按如图的步骤这里的仓库名称设置成你的github名称.github.io 如 marsguest.github.io 如果你未来不单独购买域名的话，这个名称就是你博客的域名。之后你在博客的setting中可以看得到下图的界面这时github pages 服务就开启了，换句话说，如果你在仓库中放一个index.html，之后访问我之前说的那个域名你就能看到index这个网页了. 安装和配置Git安装Git，在这个网址中选择对应自己系统的版本进行安装安装过程一路next即可 配置ssh我们知道github主要功能是代码托管，那么远端的服务器如何和我们主机内的文件连接起来呢？就是通过ssh 1.检查自己主机的ssh 设置1$ cd ~/. ssh 如果显示“No such file or directory”，说明这是你第一次使用 git 2.生成新的ssh keys1$ ssh-keygen -t rsa -C &quot;xxx@youremail.com&quot; 这里的邮件就是你注册时用的邮件地址之后回显 12Generating public/private rsa key pair.Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa): 直接回车即可 然后系统要求你输入密码 12Enter passphrase (empty for no passphrase):Enter same passphrase again: 这里输入的密码就是在你将本机的文件推到github上时用到的密码，它防止用你电脑的人随意该动云端的数据。ps：输入密码时没有回显出现如图文字，设置ssh成功 3、添加SSH Key到GitHub我们这里只是在本机生成了一个ssh，我们还得让远端的服务器知道，这步就是通知远程服务器的。在添加ssh成功的时候系统会返给你如下的文字它告诉了你ssh key 存在了哪里没找到的勾选一下文件扩展名 隐藏的项目将id_rsa.pub这个文件以记事本打开，复制内容到剪切板。进入github官网点击头像中的settingtitle写成blog即可，key就是将之前那个文件的内容复制到这。之后点击Add SSH key 4.对添加的ssh进行测试在随意位置的打开git bash键入以下代码（注意：原封不动的输就行） 1$ ssh -T git@github.com 看到如下反馈： 123The authenticity of host &apos;GitHub.com (207.97.227.239)&apos; can&apos;t be established.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.Are you sure you want to continue connecting (yes/no) yes之后回车 1Enter passphrase for key &apos;/c/Users/lenovo/.ssh/id_rsa&apos;: 输入刚刚设置的密码回车之后你会看到 successfully 5.设置用户信息胜利在望，以下是完善个人信息的部分： 12$ git config --global user.name &quot;marsguest&quot;//输入注册时的username$ git config --global user.email &quot;amrsguest@126.com&quot;//填写注册邮箱 ssh配置到此就完成了。 搭建hexo博客什么是hexo它是一个快速，简单和功能强大的博客框架.这里主要讲一下它和jekyll框架之间的区别吧。 jekyll具体实现就是你将自己的全部文件放到你clone下来的自己的本地仓库中，之后将整个仓库文件推到github，github会自动的调用jekyll框架来解析你的文件，将你的文件中的各种文件转化成网页文件，这件事是交给github做的。换句话说，倘若你在浏览别人的博客中发现他用的是jekyll框架搭建的，那么这个时候你直接进入他的.github.io的仓库中将代码原封不动的转到自己的github pages的仓库中即可，之后你输入自己的网址就能看到和他一模一样的界面 但是hexo和jekyll的工作原理不同，hexo 必须安装git 而不是github desktop，这和hexo的工作原理有关。hexo你在建立了自己的博客后，将博客中各种文件（如Markdown文件）转化成网页这件事是在你本机上完成，转化之后将生成好的html文件以及他所需要的各种资源（如js，css，images）通过git传到github上，换句话说，如果你在网上看到一片好的博客，它是利用hexo框架编的，这时你去博主的github中找源码是找不到他的初始文件的，只能看到一个个html。初始文件只在本机上有，github上存在的只是生成好的html。 了解了工作原理，下面我们进入具体的搭建步骤1.安装Node.js由于hexo是基于Node.js 的这里我们首先安装Node.js2.安装hexo在你认为合适的地方建立一个文件夹命名为Blog （这个名字无所谓）之后通过cmd cd进入这个文件夹键入npm install hexo -g 开始安装hexo之后键入hexo -v 若出现各种版本信息，则安装成功3.本机初始化博客文件夹之后的各个步骤都是在Blog文件夹里面的 1$ hexo init //初始化你的博客，过程可能有点漫长 安装依赖包1$ npm install 确保git部署1$ npm install hexo-deployer-git --save 本机试运行输入如下指令 12hexo g //主要就是将你的文件转化成网页hexo s //启动服务器默认是127.0.0.1:4000 之后你在浏览器输入127.0.0.1:4000 就能看到hexo默认主题界面了 现在你所看到的这个主题只是hexo最初始的主题，网上还有好多精美的主题供你选择，后续我将对如何配置主题进行讲解]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置]]></title>
+    <url>%2F2018%2F04%2F11%2F2018-04-11-vmwareInternet%2F</url>
+    <content type="text"><![CDATA[vmware中的两种网络连接模式（NAT模式和桥接模式）详解和配置首先打开虚拟网络编辑器：之后两种模式的配置都将在这个界面进行 NAT模式：通俗一点理解就是将你的电脑再次发成一个局域网，在上图VMnet8网卡后面对应的子网地址就是形成的局域网的子网地址，可以理解成你的主机开了热点，主机地址一般为192.168.xxx.1，然后你的虚拟机连接这个wifi.所以之后分到的ip都是在当前子网下的ip 通过NAT模式连接的虚拟机只是你电脑的内网操作，换句话说就是与你的主机在同一个局域网下的各个主机相对于你的虚拟机就是外部的主机，双方之间都无法访问。倘若你想让自己的虚拟机得到你主机所在局域网的ip，那就需要用到接下来说的桥接模式。 桥接模式：桥接模式是什么上面已经介绍清楚，这里重点讲解桥接模式的配置问题： 进入虚拟网络编辑器界面，点击更改设置： 进行到这，可能会出现一个问题出现如下问题的主要原因是安装vmware的时候网卡没有自动安装成功，此时你进入网络适配器界面可能不会出现vm的两个虚拟网卡 解决方法： 卸载vmware workstations 卸载那两个虚拟的网卡驱动（如果你有的话） 如果进行到这之后就重新去装vmware的话，安装完成后你会发现问题依旧，两个虚拟网卡本没有安装成功，出现这一问题的主要原因就是vmware在进行卸载的时候会存在大量的存留，以及注册表信息，这些信息会影响虚拟网卡的安装，解决方法是清理注册表垃圾，我用的是CCleaner，在如下界面扫描问题然后清理几次即可。4.之后重装vmware即可，虚拟网卡将正常显示出来。 之后讲解桥接网卡的选取笔记本至少含有两块网卡：无线网卡：Inter（R）Dual Band WIreless有线网卡：Realtak Pcle GBE Family Controller 看你主机当前连接的是什么网络，选择相应的网卡即可虚拟网络编辑好后，将虚拟机网络设置成桥接模式（自动），即可上网。]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>虚拟机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[（2018最新）Kali linux 安装中文输入法的方法]]></title>
+    <url>%2F2018%2F04%2F11%2F2018-04-11-kaliTypewriting%2F</url>
+    <content type="text"><![CDATA[（2018最新）Kali linux 安装中文输入法的方法回头一看，在kali中安装中文输入法是真的难，整了三天，重装3次系统，终于安装成功。下面我将自己遇到的坑和网上现有的方法结合起来给大家总结出一套能够成功安装中文输入法的方法： 前提：对网络要求比较高，也就是说首先得网好，网速不行无法安装成功。（如果你在键入apt-get update指令的时候有各种404，说明网络不好，及时更换网络）1.首先，设置源，在终端中键入如下代码，打开源设置文件 1leafpad /etc/apt/sources.list 我这里只设置一个阿里云的源，设置太多没用将source.list文件清空，只保存如下信息：1deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib 2.在终端键入如下指令 1apt-get update 如果你是新安装的kali系统，由于系统可能比较陈旧，可能会出现下图所示的数字签名错误： 12Invalid signature for Kali Linux repositories : “The following signatures were invalid: EXPKEYSIG ED444FF07D8D0BF6 Kali Linux Repository” 这个时候不要慌，键入如下指令： 1wget -q -O - https://archive.kali.org/archive-key.asc | apt-key add 当屏幕显示ok时，再输入update指令，可以与云端进行同步了。 3.很多教程说下一步是 apt-get upgrade这个指令大致意思就是将系统和所有需要进行更新的软件进行更新，但输入这个指令之后不仅会消耗你大量时间和流量，还有可能造成系统更新后无法打开终端（terminal），就因为这个，辛辛苦苦更新了几个小时，我又去重装了系统。 所以，不用进行所有软件的更新，只安装我们想要的就好。 4.执行指令 1apt-get install fcitx fcitx-googlepinyin 之后去所有应用程序界面你就能看到企鹅图标： 5.将google拼音输入法通过向上的按钮移至最上层，如图：6.最后一步，键入指令； 1reboot 重启之后，按Ctrl+Space 切换中文输入法 如果这个过程中又出现了什么其他的问题，欢迎评论，如果我了解的话，我一定会帮助你。]]></content>
+      <categories>
+        <category>Kali</category>
+      </categories>
+      <tags>
+        <tag>Kali</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[由表格中同一行的部分值动态拼接checkbox的值]]></title>
+    <url>%2F2018%2F04%2F07%2F2018-04-07-checkboxValue%2F</url>
+    <content type="text"><![CDATA[由表格中同一行的部分值动态拼接checkbox的值在实际制作网站的过程中，我们可能需要面对很多这样的表格：甚至有的时候表格的部分字段是可变的 本文主要解决的问题就是动态的拼接checkbox的value值由于我所面临的问题是作业数量字段可编辑，编辑完成后自动去后台修改数据库中的数据，而如果在刷新出这个表格的时候就定死checkbox的value的话，在改变作业数量字段时无法重新修正checkbox的value，换句话说就是checkbox的时效性被破坏。 想出的解决方案有以下两种： 在改变作业数量字段后立刻用AJAX异步地刷新界面，从而实现jsp重新从数据库中调取数据，利用相关的数据拼接checkbox的value 在进行选中这一操作时，动态的组装它的value，从而实现value值的实时性 综合对比两种方法我选择了第二种，主要原因是第一种需要重新构建sql语句进入数据库进行查找，当数据量巨大的时候，这么做会加重服务器的负荷，体现到用户这边就是卡顿，延迟。 jsp中定义表格各字段代码如下123456789out.println(&quot;&lt;tr&gt;&quot;);out.println(&quot;&lt;td&gt;&lt;input type=&apos;checkbox&apos; name=&apos;ckBox&apos; class=&apos;ckBox&apos; onclick=changeValue(this)&gt;&lt;/td&gt;&quot;); //建立checkbox代码out.println(&quot;&lt;td class=&apos;Snum&apos;&gt;&quot;+rs.getString(1)+&quot;&lt;/td&gt;&quot;);out.println(&quot;&lt;td&gt;&quot;+rs.getString(2)+&quot;&lt;/td&gt;&quot;);out.println(&quot;&lt;td&gt;&quot;+rs.getString(3)+&quot;&lt;/td&gt;&quot;);out.println(&quot;&lt;td class=&apos;Sscore&apos;&gt;&quot;+rs.getString(4)+&quot;&lt;/td&gt;&quot;);out.println(&quot;&lt;td class=&apos;Pnum&apos; onmouseover=&apos;addHand(this)&apos; onmouseout=&apos;delHand(this)&apos;onclick=updatePnum(this,&apos;&quot;+rs.getString(1)+&quot;&apos;,&apos;&quot;+rs.getString(6)+&quot;&apos;)&gt;&quot;+rs.getString(5)+&quot;&lt;/td&gt;&quot;);out.println(&quot;&lt;/tr&gt;&quot;); 大概解释一下，rs是ResultSet就是sql查询语句返回的结果集，rs.getString(i)就是对应列的值，最后一个最长的是作业数量可编辑的实现代码，偏离主题，这里先不用管 选中checkbox时的函数12345678function changeValue(obj)&#123;//根据ckBox所在行的值动态调整ckBox的value var cid = $(&quot;#indexCid&quot;).text(); var Snum = $(obj).parent().siblings(&quot;.Snum&quot;).text(); var Sscore = $(obj).parent().siblings(&quot;.Sscore&quot;).text(); var Pnum = $(obj).parent().siblings(&quot;.Pnum&quot;).text(); var newValue = cid+&quot;_&quot;+Snum+&quot;_&quot;+Sscore+&quot;_&quot;+Pnum; $(obj).val(newValue);&#125; 这里obj先找到自己父节点，也就是input，之后找siblings，也就是自己同胞结点，通过类选择器在同胞结点中找到自己想要的与checkbox同一行的字段，然后text()，取出字段的值 用所得到的信息拼接一个字符串，最后将checkbox的值通过$(obj).val(newValue); 更改 说一下自己遇到的坑吧，一开始取同胞的代码是这样写的： 1var Snum = $(obj).siblings(&quot;.Snum&quot;).text(); 就这样一直取不到同一行其他字段的值，因为我一直以为checkbox是和其他td同一层的，之后细细分析这个代码，解决了问题。]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>jQuery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[防火墙系列（三）-----防火墙的主要技术之代理技术]]></title>
+    <url>%2F2018%2F04%2F06%2F2018-04-06-Firewall_skill_02%2F</url>
+    <content type="text"><![CDATA[content{:toc} 防火墙系列（三）—–防火墙的主要技术代理技术代理技术概述代理技术的防火墙用代理服务器的方式运行于内联网络和外联网络之间，在应用层实现安全控制功能，起到内联网络和外联网络之间应用服务的转接作用。 1.代理的执行流程（两种情况）1.代理服务器监听内联网络中主机的请求，当请求到达代理服务器后，代理服务器根据安全策略对数据包的首部和数据部分信息进行检查，检查之后将内联网络中的主机源地址改为自己的地址之后将这个数据包发给外部的目的主机，这样外部的主机接到的信息是来自于代理服务器而不是源主机。目的主机应答的数据包也将发送到代理服务器，经过代理服务器检查允许通过后，代理服务器将数据包的目的地址改为内联主机的地址，之后发往目的主机。类似于在内联网络和外联网络之间设置一个中转，外联网络并不清楚内联网络的拓补结构。2.内部的主机只接受代理服务器的信息而不接收任何外部地址主机发来的信息，外部主机只能讲信息发往代理服务器，之后由代理服务器将信息转发给内联网路中的主机。代理服务器负责监控整个通信过程来保证通信过程的安全性。 2.处理代码代理技术是通过在代理服务器上安装特殊的代理代码来实现的。代理程序可以只有服务器端的代码，也可以同时有server和client端代码。 客户端代码部署有两种方式： 1.在用户主机安装特制的客户端代理服务程序，这个客户端程序通过与服务端程序相连接为用户提供网络访问服务 2.重新设置用户的网络访问过程，用户首先登陆到代理服务器上之后再由代理服务器和目标服务器相连，比如在主流浏览器中设置代理之后再进行网页的访问。 3.代理技术和包过滤技术的安全性比较 首先代理技术不仅只扫描数据包的头部的各个字段，还要进入到包的内部。还可以为安全检测和日志记录提供最详细的信息。而包过滤技术由于采用的是基于包头信息的过滤机制，没有进入到数据包的数据部分。 外联网络只能看到代理服务器而不能见到内联网络，对内也是如此，这样实现了网络隔离，降低了用户被攻击的风险。 包过滤技术通常由路由器实现，如果过滤机制被破坏，那么内联网络将毫无遮拦的与外部网络相接触，风险极高。而代理服务器被破坏的话，只是内外联网络连接中断。从这个角度来看，代理技术比包过滤更安全。 代理技术的具体作用1.隐藏内部主机上面已经大致讲过，这里不再赘述 2.过滤内容 在应用层检查的一个重要作用是可以扫描数据包的内容。这些内容是包过滤技术不能控制的支持内容的扫描技术是代理技术与其他安全技术文档一个重要的区别 3.阻断url代理服务器可以实现针对特定网址和服务器的阻断。 4.信息重定向它能改变数据包的源地址和目的地址，从而实现重定向的目的 代理技术的分类应用层网关上面主要讲的就是应用层网关代理技术；在应用层截获进出的信息，对数据包进行深度的过滤，进入到数据包的数据部分进行分析过滤。但每一种服务都要写出针对这种服务的专用代理代码，这样会使得过程麻烦复杂，不同服务之间要通过不同的代理代码来实现代理，工作量大。 电路级网关工作在会话层 连接请求方首先向电路级网关的TCP端口发出连接请求，之后网关再与目标主机进行连接，一旦连接建立，电路级网关就会在啷个方向上转发数据，正因为它位于会话层，所以对于应用层来说，它是一个通用的代理，可以传递各种应用层的服务，这一点相对于应用层网关来说是一个优势。但电路级网关可以理解为包过滤技术的扩展，在数据包检测时无法探测数据包数据内容是非存在风险，这是他的劣势之一。 简单一个表格说明二者优劣 优点缺点 应用层网关能对数据包进行深入检测，能探测数据包数据部分是否存在风险针对不同服务需要编写不同的代理代码，工作量大，维护复杂 电路级网关工作在会话层对不同的应用层数据都适用（只要是依赖于TCP的程序）包过滤技术的扩展，无法深入数据包内部对数据部分进行检测 代理技术（总）优缺点1.优点： （1）代理服务器提供缓存功能，大部分信息在服务器上有缓存，这样在提交重复请求时可以从缓存获取信息而不必再次进行网络连接，提高网络性能，这方面一个很典型的例子，比如在使用校园网下载一款软件或文件时，可能你看到下载速度远高于你所应该用于的网络带宽，这就是因为你在连接外网的过程中时先经过学校的服务器，学校服务器上恰好有这个信息的缓存，所以你的下载速度飞快。 （2）外联主机无法看清内联网络，阻止了一切对内联网络的探测活动 （3）代理服务可以提供各种用户身份认证手段，加强服务的安全性。 （4）代理服务位于应用层，提供了详细的日志记录，有助于分析。 （5）代理技术的过滤规则比包过滤的过滤规则简单 2.缺点 （1）在访问数据流量大的情况下，代理技术会增加访问的延迟。 （2）应用层代理不能支持所有的协议 （3）对操作系统有明显依赖性，必须基于 某个特定的系统和协议]]></content>
+      <categories>
+        <category>防火墙</category>
+      </categories>
+      <tags>
+        <tag>防火墙</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[防火墙系列（二）-----防火墙的主要技术之包过滤技术，状态检测技术]]></title>
+    <url>%2F2018%2F04%2F06%2F2018-04-06-Firewall_skill_01%2F</url>
+    <content type="text"><![CDATA[content{:toc} 防火墙系列（二）—–防火墙的主要技术必备知识：TCP/IP基础 包过滤技术工作对象–&gt;数据包防火墙要在数据包进入系统之前处理它实现包过滤技术的防火墙模块要在操作系统协议栈的网络层的位置。 过滤对象针对IP的过滤查看每个IP数据包的包头，将包头数据与规则集相比较，转发规则集允许的数据包，拒绝规则集不允许的数据包 针对ICMP的过滤 最常用的ping指令使用ICMP查询报文，攻击者而可以利用这样的的报文或程序探测用户网络主机和设备的可达性，进而勾勒出用户网络的拓补结构；因此要阻止类型8回送请求ICMP报文进出用户网络； 与类型8相对应的类型0回送应答报文也很值得关注，攻击者通过向目的主机发送多个类型8的报文是的服务器响应信息过多瘫痪，从而实现攻击的目的 类型5路由重定向报文，攻击者可以通过中间人攻击的方法，伪装成预期的接受者截获或者篡改正常的数据包，也可以将数据包导向至受其控制的位置网络。 还有类型3目的不可达报文。 针对TCP过滤有两种1.针对源端口或者目的端口的过滤，例如HTTP的80端口，对这些端口号进行过滤规则的设置，可以实现禁止内部用户访问指定网站。2.对标志位过滤两个标志位 SYN：建立连接 ACK：响应；下面叙述TCP三次握手的标志位变化（A向B发起连接） （1）A发出连接请求时，它发出的报文SYN位为1而其他标志位为0，该报文携带发起者自行选择的一个通信的初始序号 ； （2）B接受这个连接请求时，返回一个连接应答报文。这个报文SYN为1而ACK位为1。这个报文不但携带A对通信初始序号的确认（加1操作），而且携带B自行选择的另一个通信初始序号，如果A拒绝连接请求，则返回的报文RST位置1； （3）A对B发回的B自行选择的通信初始序号进行确认（加1操作）作为希望接受的下一个报文的序号，ACK位置1； 利用TCP标志位进行过滤：除了在连接请求的过程之外，SYN位始终置0；只要通过对SYN=1的报文进行操作，就可以实现连接会话的控制、拒绝这些报文即可。 针对UDP过滤UDP基于无连接的服务，一个UDP用户数据包报文中携带了到达目的地所需的全部信息，不需要返回任何的确认，报文之间的关系难以确定，很难指定相应的过滤规则。有效解决方法–&gt;动态包过滤技术 包过滤优点1.简单快速，只需在内联网络与外联网络之间的路由器上安装过滤模块即可 2.对用户是透明的，不需安装特定的软件，不需要进行任何的培训 3.检查规则相对简单耗时极短，执行效率非常高 包过滤缺点1.思想简单，对信息处理能力有限，只能访问包头中的部分信息，不能理解通信的上下文； 2.过滤规则增多时维护困难，规则之间的包含冲突关系复杂； 3.控制层次较低，不能实现用户级的控制；解决–&gt;动态包过滤； 状态检测技术提出前景为了解决静态包过滤技术的各项缺点，提出这个概念、可以根据实际情况动态的自动生成或删除安全过滤规则，不需要管理人员的手工设置。 基本原理根据连接的状态进行检查，当一个初始数据的报文到达防火墙时，首先检查该报文是否符合安全过滤规则的规定。如果符合，将这条连接记录下来并且添加允许这条连接通过的过滤规则，之后向目的地址转发报文。以后凡是属于这个连接的数据防火墙一律通过（双向的）。在通信结束后，防火墙将自动删除关于这条连接的过滤规则，主要工作在传输层。 TCP：定义了多种状态，以状态信息为基础，结合相应的标志位信息，加上双方的IP地址和端口号，建立TCP的状态连接表来精确的跟踪监控、 UDP：无连接的模式，状态难以定义和追踪，伪状态连接 由于不知道结束状态，超时删除，对错误的处理，通过ICMP传递差错信息。 ICMP：无连接，超时删除，按照ICMP报文对称性，当属于同一连接的ICMP报文完成请求这一应答过程之后，即可将其从状态连接表中删除。 状态检测优点1.安全性高于静态包过滤，状态检测机制可以区分发送方和接受方。 2.提高效率，一开始对连接进行详细检查，之后添加规则通过，不用在同一连接执行重复的动作。 状态检测缺点1.主要在网络层和传输层，对报文数据部分检查少，安全性有限。 2.检查内容多，对防火墙性能要求高；]]></content>
+      <categories>
+        <category>防火墙</category>
+      </categories>
+      <tags>
+        <tag>防火墙</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[防火墙系列（一）-----何为防火墙]]></title>
+    <url>%2F2018%2F04%2F06%2F2018-04-06-Firewall_definition%2F</url>
+    <content type="text"><![CDATA[防火墙系列（一）—–何为防火墙防火墙是什么（简单解释下内联网络和外联网络内联网络类似于局域网是指某个企业或者单位内部交互的网络，外联网络就是外部的Internet） 部署在用户内联网络和外联网络之间的一道屏障，一切内外联网络交换的数据都应该通过防火墙设备。以预先定义好的安全规则为标准，防火墙将对通过他的数据进行安全监测，符合安全规则的数据流将准予放行，不符合规则的数据流将被阻隔。 防火墙系统包括硬件设备，相关的软件代码和安全策略。 广义上讲，防火墙是隔离在内联网络和外联网络之间的一个防御系统。双向数据流都将经过防火墙。重点–&gt;访问控制策略 控制内联主机如何访问外联网络以及外联主机如何访问内联网络。具体体现为防火墙的过滤规则。防火墙的物理位置 从具体实现的角度来看，防火墙有一个独立的进程或者一组紧密联系的进程构成。它运行于路由器，堡垒主机或者任何提供网络安全的设备组合上。 对于个人防火墙来说，防火墙一般是指安装在单台主机硬盘上的软件系统。防火墙的逻辑位置ISO 7层模型防火墙级别应用层网关级表示层—会话层—传输层电路级网络层路由器级数据链路层网桥级物理层中继器级防火墙的理论特性和实际功能理论上讲是分离器，限制器和分析器。实现4类控制功能：1.方向控制：控制特定的服务请求通过它的方向2.服务控制：控制用户可以访问的网络服务类型。3.行为控制：控制使用特定服务的方式。4.用户控制：控制可以进行网络访问的用户。（较复杂，涉及到报文中的数据部分） –阻塞点：防火墙就是在内和外联网络之间建立的唯一一个安全控制检查点，通过允许拒绝和重定向经过防火墙的数据流，实现对进出内联网络的服务和访问的审计和控制。这样的检查点就叫阻塞点。 实际功能：1.包过滤 （Packet Filtering） 各层网络协议的头部字段以及通过字段分析得到的链接状态等内容都可以作为过滤技术考察的参数。动态包过滤—状态检测技术。2.代理（Proxy） 将用户的请求变成由防火墙转发，外联网络看不到内联网络的结构，也就无法访问内联网路的主机。代理技术可以提供更加深入的过滤，甚至可以理解为应用层的内容，实现复杂且速度较慢。3.网络地址转换（Network Address Tranlation）Sample:内联网络中主机A 向外部网络中ip进行访问请求，这一请求到达防火墙时，防火墙将请求中的源IP地址转换成它可以利用的一个公共IP地址，之后将变动后的请求发往目的地。当外部主机返回请求时，将目的地址进行转化，转换成主机A的地址，之后将数据发给主机A；4.虚拟专用网（Virtual Private Network,VPN）5.用户身份认证（Authentication）6.记录报警，分析和审计 生成防火墙日志7.管理功能 防火墙的规则防火墙的规则可以告诉防火墙哪些类型的通信量可以进出防火墙。所有防火墙都有一个规则文件，是其最重要就的配置文件。 规则设计原则1.拒接访问一切未经特许的服务–&gt;限制性原则（DENY ALL）–&gt;限制性防火墙 默认阻断任何不允许的通信，只允许一些特定的服务通过。2.允许访问一切未被特别拒绝的服务–&gt;连贯性原则（ALLOW ALL）–&gt;连通性防火墙 与法律类似 二者主要区别：DENY ALL是告诉我什么能做，没告诉我的都不能做。ALLOW ALL 告诉我什么不能做，没特别指出不能做的都能做。 规则的顺序问题，设计时要慎重对待，因为不同的规则之间可能有包含，交叉甚至是排斥的关系，顺序不同可能导致规则的冲突以至造成系统漏洞。]]></content>
+      <categories>
+        <category>防火墙</category>
+      </categories>
+      <tags>
+        <tag>防火墙</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Jsp中实现利用数据库中的数据动态拼接select的option]]></title>
+    <url>%2F2018%2F04%2F01%2F2018-04-01-activeSelect%2F</url>
+    <content type="text"><![CDATA[Jsp中实现利用数据库中的数据动态拼接select的option动态拼接select标签本教程主要解决的问题是利用数据库中的数据动态的显示到下拉选框中，通过这个下拉选框的值动态的调整下一个下拉选框的选项。主要效果如下图：这四个选项是数据库中的数据当选中指定学期后，能够动态的加载第二个下拉框的内容，也就是当前学期开设的课程 第一个下拉框的具体实现这是第一个下拉框的select标签 12 &lt;select style=&quot;width:180px;&quot; id=&quot;semester&quot; name=&quot;semester&quot; onclick=&quot;showCourse(this.value)&quot;&gt;&lt;/select&gt; 实现semester下拉选框的JSP代码12345678910111213141516&lt;% request.setCharacterEncoding(&quot;UTF-8&quot;); String semestersSql = &quot;select * from semesterrecord&quot;; try&#123; Connection cn = DataBase.getConnection();//链接数据库的常规操作 PreparedStatement ps = cn.prepareStatement(semestersSql); ResultSet rs = ps.executeQuery(); while(rs.next())&#123; %&gt; &lt;script&gt; $(document).ready(function()&#123; $(&quot;#semester&quot;).append(&quot;&lt;option value=&apos;&lt;%=rs.getString(1)%&gt;&apos;&gt;&lt;%=rs.getString(1)%&gt;&lt;/option&gt;&quot;); &#125;); &lt;/script&gt; &lt;% &#125; &#125;catch(Exception e)&#123;&#125;%&gt; 链接数据库的操作过程中我已经将构造Connection的部分独立出去写成了一个独立的类DataBase，之后通过调用DataBase的静态方法getConnection()就可以得到connection对象。 得到rs结果集之后利用rs结果集的getstring方法将各个列的结果输出到option标签中 第二个下拉框的具体实现我们注意到semester的select标签中有一个函数showCourse()它是通过点击触发的。下面讲解showCourse（）函数 1234567891011121314151617181920212223242526function showCourse(str)&#123; var xmlhttp; if (str==&quot;&quot;) &#123; document.getElementById(&quot;txtHint&quot;).innerHTML=&quot;&quot;; return; &#125; if (window.XMLHttpRequest)//主要解决浏览器兼容问题 &#123; xmlhttp=new XMLHttpRequest(); &#125; else &#123; xmlhttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); &#125; xmlhttp.onreadystatechange=function() &#123; if (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200) &#123; document.getElementById(&quot;txtHint&quot;).innerHTML=xmlhttp.responseText; &#125;//将返回的信息外显到txtHint这个span中 &#125; xmlhttp.open(&quot;GET&quot;,&quot;Judge.jsp?semester=&quot;+str,true); xmlhttp.send(); &#125; 利用的是ajax的知识，构造一个xmlhttp异步动态的与Judge.jsp进行交互。具体的ajax语法不再赘述。 将第一个select的值通过get传递给Judge.jsp 以下是Judge.jsp的处理代码 1234567891011121314151617181920212223242526272829&lt;% String chooseSem = request.getParameter(&quot;semester&quot;); Connection cn = null;//链接数据库的常规操作 ResultSet rs = null; PreparedStatement ps =null; if(chooseSem!=null)&#123; String courseSql = &quot;select Cname,teacher,Cid from course where semester =&apos;&quot;+chooseSem+&quot;&apos;&quot;//自己构造sql语句 try&#123; cn = DataBase.getConnection(); ps = cn.prepareStatement(courseSql); rs = ps.executeQuery(); out.println(&quot;&lt;select name=&apos;cid&apos; id=&apos;cid&apos;&gt;&quot;); while(rs.next())&#123; out.println(&quot;&lt;option value=&apos;&quot;+rs.getString(3)+&quot;&apos;&gt;&quot;+rs.getString(1)+&quot; &quot;+rs.getString(2)+&quot;&lt;/option&gt;&quot;); &#125; out.println(&quot;&lt;/select&gt;&lt;br&gt;&quot;); &#125;catch(Exception e)&#123;&#125; finally &#123; try &#123; cn.close(); ps.close(); rs.close(); &#125;catch(Exception e) &#123;&#125; &#125; &#125;%&gt; 重点就是通过out.println()向之前的界面响应信息有两点细节： 1.注意sql语句要构造正确，出错的话可能控制台都读不出是哪里的问题，之前有一次就是sql语句中我将表明拼写错了，之后根本找不出错误的点，debug耗费大量的时间。所以这个小细节需要注意 2.上面接受到Judge.jsp返回的信息时用的是： 1document.getElementById(&quot;txtHint&quot;).innerHTML=xmlhttp.responseText; 这里用的是信息覆盖的模式，倘若你仅仅是想追加内容可以这样做 12var html = document.getElementById(&quot;txtHint&quot;).innerHTML;document.getElementById(&quot;txtHint&quot;).innerHTML=html+xmlhttp.responseText; 先构造html接受现在txtHint中的信息，之后将response的信息将html拼接，一起放入txtHint中。]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>AJAX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[jQuery实现悬浮窗口]]></title>
+    <url>%2F2018%2F03%2F27%2F2018-03-27-JqueryWindow%2F</url>
+    <content type="text"><![CDATA[jQuery实现悬浮窗口最近有这样的一个需求就是在网页上实现点击特定的控件实现弹出窗口进行一些表单的提交之类。最终实现的大致效果如下： 首先，应该明确一点，即便是弹出窗口，也是通过控制div的display属性实现的。具体步骤分为以下三点： 1. 建立窗口的div，注意position设置成absolute，这样以后可以自己调整它在网页上的位置。 2.建立弹出窗口时背景为黑色的div，通过调整div的重叠属性z-index，从而实现黑色背景遮挡之前的主界面，然后将窗口div设置到黑色背景之上。 3.设置关闭按钮，点击关闭后隐藏背景和div窗口，显示主界面。 HTML代码12345678910111213141516&lt;body&gt; &lt;div&gt;这是一个主界面&lt;/div&gt;&lt;br&gt; &lt;button id=&quot;btn&quot;&gt;点击这里实现弹窗&lt;/button&gt; &lt;div id=&quot;choiceWindow&quot;&gt; &lt;label id=&quot;x&quot; style=&quot;position: absolute;top:2px;left: 95%;font-size: 25px;&quot;&gt;x&lt;/label&gt; &lt;form&gt; &lt;label&gt;请选择开课学期：&lt;/label&gt;&amp;nbsp &amp;nbsp &amp;nbsp &lt;select&gt; &lt;option value=&quot;2017-2018-1&quot;&gt;2017-2018-1&lt;/option&gt; &lt;option value=&quot;2017-2018-2&quot;&gt;2017-2018-2&lt;/option&gt; &lt;/select&gt;&lt;br&gt;&lt;br&gt; &lt;/form&gt; &lt;/div&gt; &lt;div id=&quot;backGround&quot;&gt;&lt;/div&gt; &lt;/body&gt; 其中的x就是实现一个简单的关闭按钮 CSS代码1234567891011121314151617181920212223242526272829&lt;style type=&quot;text/css&quot;&gt; #choiceWindow &#123; display: none; position: absolute; top: 25%; left: 25%; width: 30%; height: 55%; padding: 20px; border: 3px solid #ccc; background-color: white; z-index:2; overflow: auto; &#125; #backGround &#123; display: none; position: absolute; top: 0%; left: 0%; width: 100%; height: 1100px; background-color: black; z-index:1; -moz-opacity: 0.8; opacity:.80; filter: alpha(opacity=88); &#125; #x:hover &#123;cursor: pointer;color: rgb(55,198,192);&#125; &lt;/style&gt; 简单解释一下： 1.z-index就是调整z轴位置也就是不同div上下层关系，数值越大越靠上。2.overflow属性即div中内容超出div所能够承载的大小后能够自动的显示滚动条实现剩余文字的显示。3.-moz-opacity: 0.8; opacity:.80; filter: alpha(opacity=88);均为设置透明度，这里不再赘述。4.最后x就是简单设置鼠标移到x上的样式变化。 JS代码123456789101112131415&lt;script type=&quot;text/javascript&quot;&gt; $(document).ready(function()&#123; $(&quot;#btn&quot;).click(function()&#123; $(&quot;#choiceWindow&quot;).slideDown(300); $(&quot;#backGround&quot;).show(); &#125;); $(&quot;#x&quot;).click(function()&#123; $(&quot;#choiceWindow&quot;).slideUp(300); $(&quot;#backGround&quot;).hide(); &#125;) &#125;); &lt;/script&gt; 用了slide让整个效果更佳有动感。js需自行导入jQuery。]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>jQuery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题]]></title>
+    <url>%2F2018%2F03%2F22%2F2018-03-22-eclipseTomecat%2F</url>
+    <content type="text"><![CDATA[关于eclipse部署tomcat后项目加入根目录以及XML自动修改的问题最近自学javaweb编程，在eclipse部署tomcat后新建web项目，发现自己新建的项目能在tomcat上运行但是无法再tomcat的根目录中找到整个项目文件。将新的项目添加到tomcat的webapps目录中的方法如下：1.调到server视图中如果你已经将项目添加进了server，先将它remove掉 2.双击server视图，进入server设置界面重点是将划红线的部分配置正确之后重新将项目在server上运行，这时你就会发现整个项目文件已经添加到了tamcat根目录的webapps文件夹下。 另一个问题，eclipse无法自动将我们写的servlet的各种信息动态的添加到xml文件中，导致访问界面时出现404错误，常规的方法是手动的添加像这样的代码到xml文件中 12345678&lt;servlet&gt; &lt;servlet-name&gt;first&lt;/servlet-name&gt; &lt;servlet-class&gt;FirstServlet&lt;/servlet-class&gt;&lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;first&lt;/servlet-name&gt; &lt;url-pattern&gt;/first.bin&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; 倘若我每次写一个servlet都这样去修改xml岂不是很繁琐，之后查资料发现解决的方法很简单，在新建java文件的时候不要直接选择class之后继承servlet，而是直接去新建servlet，如果没有去other中找。 然后在@WebServlet(“”)的双引号中填入之前的url-pattern信息即可，这样就不用每次都去修改xml文件.]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[c++中常引用const int &a的介绍]]></title>
+    <url>%2F2017%2F11%2F10%2F2017-11-10-C%2B%2B%2F</url>
+    <content type="text"><![CDATA[c++中常引用const int &amp;a的介绍引用 引用：简单的讲就是某个变量的别名。对一个变量的“引用”的所有操作，实际上都是对其所代表的（原来的）变量的操作。 设有一个变量x，要给它起一个别名y，可以这样写： 12int x; // 定义变量x int &amp;y = x;// 声明y是一个浮点型变量的引用变量，它被初始化为x 声明后，使用x或y代表同一变量。在上述声明中，&amp;是“引用声明符”长相与取地址符相同 对引用而言，新定义的引用变量是不申请内存单元的，与它引用的对象共同同一块变量存储单元，正是因为这一特性，在声明一个引用的同时必须将其初始化 12int &amp;c=a;//正确int &amp;c;//错误 在函数中声明一个变量的引用后，在函数执行期间，该引用一直与其代表的变量相联系，不能再作为其他变量的别名。例如： 123int a, b; // 定义整型变量a,bint &amp;c = a; // 使c成为变量a的引用int &amp;c = b; // 又使c成为变量b的引用是错误的 在c++中加入引用的主要目的是为了给函数传参。在C语言中，将变量名作为实参。这时将变量的值传递给形参。传递是单向的，在调用函数时，形参和实参不是同一个存储单元。在执行函数期间形参值发生变化并不传回给实参。而引用与他所引用的对象共用同一块内存空间，在函数中直接改变引用的值，原变量的值也会随之改###常引用### 常引用就是在引用之前加上const对引用进行限制，使得该引用在函数中不能进行改变（但可以改变原变量的值），例如 1234int a = 6; // 定义整型变量a，初值为6const int &amp;b = a; // 声明常引用，不允许改变b的值b = 8; // 改变常引用b的值，错误a = 8; // 改变a的值，正确 常引用通常用作函数形参，这样能保证形参的不被改变 关于常引用的声明 在声明时，可以用常量或者是表达式常引用进行声明 123int a = 6; // 定义变量const int &amp;b = a + 3; // 正确,可以用表达式对常引用进行初始化int &amp;c = a + 3; // 错误,对非常引用只能用变量进行初始化 在以表达式的形式对常引用进行声明时，系统将自动生成一个临时变量，用这个临时变量存表达的值，之后常引用实是这个临时变量的引用。例如将const int &amp;b=a+7;自动转化为 12int temp=a+7;//临时变量tempconst int &amp;b=temp;]]></content>
+      <categories>
+        <category>C/C++</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+      </tags>
+  </entry>
+</search>
