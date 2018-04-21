@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup首先，直接上传一句话木马1.php文件 1&amp;lt;?php eval($_POST[&amp;apos;cmd&amp;apos;]);?&amp;gt;  //文件内容 发现如图弹窗初步判断是前台直接判断文件类型，这种绕过相对简单，更改传输时文件类型即可再次上传1.php的一句话，利用burpsuite抓包，将文件类型改为im">
+<meta name="description" content="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup首先，直接上传一句话木马1.php文件 1&amp;lt;?php eval($_POST[&amp;apos;cmd&amp;apos;]);?&amp;gt;  //文件内容 发现如图弹窗">
 <meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup">
 <meta property="og:url" content="http://yoursite.com/2018/04/21/2018-04-21-upload/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup首先，直接上传一句话木马1.php文件 1&amp;lt;?php eval($_POST[&amp;apos;cmd&amp;apos;]);?&amp;gt;  //文件内容 发现如图弹窗初步判断是前台直接判断文件类型，这种绕过相对简单，更改传输时文件类型即可再次上传1.php的一句话，利用burpsuite抓包，将文件类型改为im">
+<meta property="og:description" content="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup首先，直接上传一句话木马1.php文件 1&amp;lt;?php eval($_POST[&amp;apos;cmd&amp;apos;]);?&amp;gt;  //文件内容 发现如图弹窗">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/2018042101.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018042102.jpg">
@@ -100,10 +100,10 @@
 <meta property="og:image" content="http://yoursite.com/images/2018042104.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018042105.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2018042106.jpg">
-<meta property="og:updated_time" content="2018-04-21T10:03:05.977Z">
+<meta property="og:updated_time" content="2018-04-21T10:52:25.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup">
-<meta name="twitter:description" content="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup首先，直接上传一句话木马1.php文件 1&amp;lt;?php eval($_POST[&amp;apos;cmd&amp;apos;]);?&amp;gt;  //文件内容 发现如图弹窗初步判断是前台直接判断文件类型，这种绕过相对简单，更改传输时文件类型即可再次上传1.php的一句话，利用burpsuite抓包，将文件类型改为im">
+<meta name="twitter:description" content="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup首先，直接上传一句话木马1.php文件 1&amp;lt;?php eval($_POST[&amp;apos;cmd&amp;apos;]);?&amp;gt;  //文件内容 发现如图弹窗">
 <meta name="twitter:image" content="http://yoursite.com/images/2018042101.jpg">
 
 
@@ -407,7 +407,7 @@
       
         <h1 id="第三届“百越杯”福建省高校网络空间安全大赛Do-you-know-upload？Writeup"><a href="#第三届“百越杯”福建省高校网络空间安全大赛Do-you-know-upload？Writeup" class="headerlink" title="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup"></a>第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup</h1><p>首先，直接上传一句话木马1.php文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php eval($_POST[&apos;cmd&apos;]);?&gt;  //文件内容</span><br></pre></td></tr></table></figure>
-<p>发现如图弹窗<br><img src="/images/2018042101.jpg" alt="这里写图片描述"><br>初步判断是前台直接判断文件类型，这种绕过相对简单，更改传输时文件类型即可<br>再次上传1.php的一句话，利用burpsuite抓包，将文件类型改为image/gif<br><img src="/images/2018042102.jpg" alt="这里写图片描述"><br>成功上传<br><img src="/images/2018042103.jpg" alt="这里写图片描述"><br>利用菜刀连接之前的上传好的一句话，拿到shell，看到根目录中存在文件config.php,打开，看到数据库用户名和密码<br><img src="/images/2018042104.jpg" alt="这里写图片描述"><br>菜刀连接数据库，拿到flag<br><img src="/images/2018042105.jpg" alt="这里写图片描述"><br><img src="/images/2018042106.jpg" alt="这里写图片描述"></p>
+<p>发现如图弹窗<br><a id="more"></a><br><img src="/images/2018042101.jpg" alt="这里写图片描述"><br>初步判断是前台直接判断文件类型，这种绕过相对简单，更改传输时文件类型即可<br>再次上传1.php的一句话，利用burpsuite抓包，将文件类型改为image/gif<br><img src="/images/2018042102.jpg" alt="这里写图片描述"><br>成功上传<br><img src="/images/2018042103.jpg" alt="这里写图片描述"><br>利用菜刀连接之前的上传好的一句话，拿到shell，看到根目录中存在文件config.php,打开，看到数据库用户名和密码<br><img src="/images/2018042104.jpg" alt="这里写图片描述"><br>菜刀连接数据库，拿到flag<br><img src="/images/2018042105.jpg" alt="这里写图片描述"><br><img src="/images/2018042106.jpg" alt="这里写图片描述"></p>
 
       
     </div>
