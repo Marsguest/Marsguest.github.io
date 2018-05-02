@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[burpsuite集成sqlmap插件]]></title>
+    <url>%2F2018%2F05%2F03%2F2018-05-03-burpsuite%2Bsqlmap%2F</url>
+    <content type="text"><![CDATA[burpsuite集成sqlmap插件环境搭建1.python 22.burpsuite3.sqlmap4.sqlmap.jar python 2 安装及配置 首先到 这里 下载与你电脑相对应的python2版本之后点开安装默认路径一路next就好 python 2环境变量配置（win10）点开我的电脑，左上角属性点击左面的高级系统设置选择高级中的环境变量在系统环变量中点击编辑path添加两条记录： 12C:\Python27\Scripts 路径填你之前的安装路径C:\Python27 之后在cmd中输入python 如果显示出python的版本信息就安装成功了注意： 可能有的朋友会问“那我安装python3可以吗”，至少现在sqlmap是不支持python3的，那你可能会接着问“那我需要卸载python3去安装python2吗”，答案当然是不用，这里再大概讲一下电脑同时安装python2和3的方法，这里已先行安装了python3为例：1.在python环境中键入如下指令，查看python3的安装路径 12import sys print (sys.path) 到相应的文件夹中将python.exe改名为python3.exe之后在cmd中输入python3，即可看到python3的版本信息后面按照流程安装python2即可，最终效果如图；当然你也可以将python2的exe文件命名成python2.exe，但由于之后sqlmap是默认被python2默认识别的，这里一定要将python指令留给python2（算是之前自己踩过的坑） sqlmap安装以及配置到 这里 下载官方sqlmap的zip文件解压缩后同python一样配置环境变量我这里这个复杂的文件名就是sqlmap.zip解压后的那个文件夹在cmd中输入sqlmap.py显示版本信息表示安装成功 burpsuite配置sqlmap插件下载sqlmap.jar扩展包链接：http://pan.baidu.com/s/1skDVwq5 密码：ce5f倘若失效请在下方评论 正式配置点击burp第一栏的extender–&gt;add–&gt;select file.选择你下好的sqlmap.jar文件成功后burp第一栏出现sqlmap标签 sqlmap插件测试用burp抓包右键选择sent to sqlmap成功调入sqlmap]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>sqlmap</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[实验吧天网管理系统Writeup]]></title>
     <url>%2F2018%2F05%2F01%2F2018-05-01-shiyanbaWriteup%2F</url>
     <content type="text"><![CDATA[实验吧天网管理系统Writeup原题地址 实验吧–天网管理系统用到的知识点：1.php弱类型相等2.php函数serialize()与unserialize()（序列化和反序列化）首先查看源文件，发现提示： 12&lt;!-- $test=$_GET[&apos;username&apos;]; $test=md5($test); if($test==&apos;0&apos;) --&gt; 意思就是将输入的username的值进行md5加密，之后与0相等即可php中==是只进行值的比较，不管二者的类型。当两个字符串进行==比较的时候，则比较字符串中第一个不是数字的字符之前的数字串所代表的整数值，例如”0marsguest”与”0”就是相等的。那么下面的主要任务就是找到md5加密后是0的值，这样的例子有很多，参考链接：http://marsguest.com/2018/05/01/2018-05-01-md5-0/我这里用的是240610708，将用户名输入240610708，得到提示：访问这个界面。得到新的提示： 123456789$unserialize_str = $_POST[&apos;password&apos;]; $data_unserialize = unserialize($unserialize_str); if($data_unserialize[&apos;user&apos;] == &apos;???&apos; &amp;&amp; $data_unserialize[&apos;pass&apos;]==&apos;???&apos;) &#123; print_r($flag); &#125;伟大的科学家php方言道：成也布尔，败也布尔。回去吧骚年 简单审计一下，大意就是将password的值进行反序列化，之后得到的是一个数组，数组中user和pass的值都等于一个东西，但是具体是什么并未给出。 关于序列化和反序列化大致意思实例化的对象经过序列化serialize() 转成一个连续的字符串，将这个字符串再进行反序列化即可得到原本的对象，下面的解释直接上代码 123456789101112131415161718&lt;?php class student&#123; var $name; var $num; var $age; function student($name=&quot;null&quot;,$num=&quot;null&quot;,$age=0)&#123; $this-&gt;name = $name; $this-&gt;age = $age; $this-&gt;num = $num; &#125; function getname()&#123; return ($this-&gt;name); &#125; &#125; $student1 = new student(&quot;marsguest&quot;,&quot;2016201601&quot;,20);//实例化一个对象 $serStu = serialize($student1); echo $serStu;?&gt; 最终打印出的数据： 12O:7:&quot;student&quot;:3:&#123;s:4:&quot;name&quot;;s:9:&quot;marsguest&quot;;s:3:&quot;num&quot;;s:10:&quot;2016201601&quot;;s:3:&quot;age&quot;;i:20;&#125; O表示object ， s表示string ， i 表示int ， 数字表示对应字段的长度.（还有b表示bool，a表示array，后面会用到）注意： 布尔和整型数不用写长度，直接跟值即可下面我们将$serStu反序列化； 123unset($student1);//释放student1这个对象$newStu = unserialize($serStu);echo $newStu-&gt;getname(); 成功打印出student1的名字marsguest ok，言归正传，我们最后是要构造password，这个password经过反序列化后是存有user和pass两个键的数组，之后将user和pass对应的值与一个东西相等，这里还有一个重要提示伟大的科学家php方言道：成也布尔，败也布尔。回去吧骚年 bool类型的true跟任意字符串可以弱类型相等，于是构造password 1a:2:&#123;s:4:&quot;user&quot;;b:1;s:4:&quot;pass&quot;;b:1;&#125; 成功拿到flag]]></content>
