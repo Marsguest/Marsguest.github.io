@@ -395,23 +395,15 @@
 
       
         
-          
-            <h1 id="Java基础复习–构造器"><a href="#Java基础复习–构造器" class="headerlink" title="Java基础复习–构造器"></a>Java基础复习–构造器</h1><p>前段时间密集的考试，没来得及更新博客，最近在参加实训,前期的主要内容是Java，整好趁这个机会将Java的基础知识再整合一下</p>
-<h2 id="构造器定义"><a href="#构造器定义" class="headerlink" title="构造器定义"></a>构造器定义</h2><p>构造器，又叫构造方法，是创建对象必须调用的一个方法，如果该方法不能被成功调用则对象<strong>无法创建</strong>。（如果在类中我们没有显性的定义构造方法，java会自动为我们创建一个空的无参数的构造方法）</p>
-<h2 id="构造器的作用"><a href="#构造器的作用" class="headerlink" title="构造器的作用"></a>构造器的作用</h2><p>1.创建对象<br>2.给对象属性进行赋值（初始化）</p>
-<h2 id="构造器的语法"><a href="#构造器的语法" class="headerlink" title="构造器的语法"></a>构造器的语法</h2><p>eg：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">	public Student()&#123;</span><br><span class="line">	//这是一个构造器	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>构造器语法定义</strong>： 访问修饰符 类名(){}</p>
-<p>下面将用具体的例子展示构造器初始化功能</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Animal &#123;</span><br><span class="line">    public String name;</span><br><span class="line"></span><br><span class="line">    public String color;</span><br><span class="line"></span><br><span class="line">    public double weight;</span><br><span class="line"></span><br><span class="line">    public String desc;</span><br><span class="line">	public Animal()&#123;//构造方法1</span><br><span class="line">        name = &quot;小猫&quot;;</span><br><span class="line">        color = &quot;黑色&quot;;</span><br><span class="line">        weight = 5.5;</span><br><span class="line">        desc = &quot;一只来自北方的小猫&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">	public Animal(String a,String b,double c,String desc)&#123;</span><br><span class="line">		//构造方法2</span><br><span class="line">        //构造器的语法没有返回类型</span><br><span class="line">        //如果用户不提供构造器则系统默认提供一个无参的构造器</span><br><span class="line">        name = a;</span><br><span class="line">        color = b;</span><br><span class="line">        weight = c;</span><br><span class="line">        this.desc = desc;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">	    Animal a1 = new Animal();</span><br><span class="line">        Animal a2 = new Animal(&quot;小狗&quot;,&quot;黄色&quot;,5.6,&quot;我是一只来自南方的小狗&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在上面的实例中对象a1调用的是构造方法1，对象a2调用的是构造方法2，分别表示了不带参数的构造方法，和带参数的构造方法，前者将属性的初值<strong>直接写在构造器</strong>中这个过程是静态的也就是直接写死的，后者可以在调用构造函数的时候<strong>动态地赋初值</strong>。</p>
-<p><strong>注意：</strong><br>在构造函数2中，第四个参数desc</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public Animal(String a,String b,double c,String desc)&#123;</span><br><span class="line">        name = a;</span><br><span class="line">        color = b;</span><br><span class="line">        weight = c;</span><br><span class="line">        this.desc = desc;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>这里用到了this，原因是形参与类的属性名恰好相同，如果此时将赋值语句写成这样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc = desc;</span><br></pre></td></tr></table></figure>
-<p>计算机不能知道你所指的desc到底是类的属性还是形参，所以此时需要用this.desc来唯一的指定类的desc属性</p>
-
-          
+          <h1 id="Java基础复习–构造器"><a href="#Java基础复习–构造器" class="headerlink" title="Java基础复习–构造器"></a>Java基础复习–构造器</h1><p>前段时间有密集的考试，所以没来得及更新博客，我最近在公司参加实训,前期的主要内容是Java，正好趁这个机会将Java的基础知识再整合一下</p>
+<h2 id="构造器定义"><a href="#构造器定义" class="headerlink" title="构造器定义"></a>构造器定义</h2><p>构造器，又叫构造方法，是创建对象必须调用的一个方法，如果该方法不能被成功调用则对象<strong>无法创建</strong>。（如果在类中我们没有显性的定义构造方法，java会自动为我们创建一个空的无参数的构造方法）<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/11/2018-07-11-Java Construction method/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
