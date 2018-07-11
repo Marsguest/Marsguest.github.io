@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java基础复习--构造器]]></title>
+    <url>%2F2018%2F07%2F11%2F2018-07-11-Java%20Construction%20method%2F</url>
+    <content type="text"><![CDATA[Java基础复习–构造器前段时间密集的考试，没来得及更新博客，最近在参加实训,前期的主要内容是Java，整好趁这个机会将Java的基础知识再整合一下 构造器定义构造器，又叫构造方法，是创建对象必须调用的一个方法，如果该方法不能被成功调用则对象无法创建。（如果在类中我们没有显性的定义构造方法，java会自动为我们创建一个空的无参数的构造方法） 构造器的作用1.创建对象2.给对象属性进行赋值（初始化） 构造器的语法eg： 12345class Student&#123; public Student()&#123; //这是一个构造器 &#125;&#125; 构造器语法定义： 访问修饰符 类名(){} 下面将用具体的例子展示构造器初始化功能 1234567891011121314151617181920212223242526272829public class Animal &#123; public String name; public String color; public double weight; public String desc; public Animal()&#123;//构造方法1 name = &quot;小猫&quot;; color = &quot;黑色&quot;; weight = 5.5; desc = &quot;一只来自北方的小猫&quot;; &#125; public Animal(String a,String b,double c,String desc)&#123; //构造方法2 //构造器的语法没有返回类型 //如果用户不提供构造器则系统默认提供一个无参的构造器 name = a; color = b; weight = c; this.desc = desc; &#125; public static void main(String[] args)&#123; Animal a1 = new Animal(); Animal a2 = new Animal(&quot;小狗&quot;,&quot;黄色&quot;,5.6,&quot;我是一只来自南方的小狗&quot;); &#125;&#125; 在上面的实例中对象a1调用的是构造方法1，对象a2调用的是构造方法2，分别表示了不带参数的构造方法，和带参数的构造方法，前者将属性的初值直接写在构造器中这个过程是静态的也就是直接写死的，后者可以在调用构造函数的时候动态地赋初值。 注意：在构造函数2中，第四个参数desc 123456public Animal(String a,String b,double c,String desc)&#123; name = a; color = b; weight = c; this.desc = desc; &#125; 这里用到了this，原因是形参与类的属性名恰好相同，如果此时将赋值语句写成这样 1desc = desc; 计算机不能知道你所指的desc到底是类的属性还是形参，所以此时需要用this.desc来唯一的指定类的desc属性]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[burpsuite集成sqlmap插件]]></title>
     <url>%2F2018%2F05%2F03%2F2018-05-03-burpsuite%2Bsqlmap%2F</url>
     <content type="text"><![CDATA[burpsuite集成sqlmap插件环境搭建1.python 22.burpsuite3.sqlmap4.sqlmap.jar python 2 安装及配置 首先到 这里 下载与你电脑相对应的python2版本之后点开安装默认路径一路next就好 python 2环境变量配置（win10）点开我的电脑，左上角属性点击左面的高级系统设置选择高级中的环境变量在系统环变量中点击编辑path添加两条记录： 12C:\Python27\Scripts 路径填你之前的安装路径C:\Python27 之后在cmd中输入python 如果显示出python的版本信息就安装成功了注意： 可能有的朋友会问“那我安装python3可以吗”，至少现在sqlmap是不支持python3的，那你可能会接着问“那我需要卸载python3去安装python2吗”，答案当然是不用，这里再大概讲一下电脑同时安装python2和3的方法，这里已先行安装了python3为例：1.在python环境中键入如下指令，查看python3的安装路径 12import sys print (sys.path) 到相应的文件夹中将python.exe改名为python3.exe之后在cmd中输入python3，即可看到python3的版本信息后面按照流程安装python2即可，最终效果如图；当然你也可以将python2的exe文件命名成python2.exe，但由于之后sqlmap是默认被python2默认识别的，这里一定要将python指令留给python2（算是之前自己踩过的坑） sqlmap安装以及配置到 这里 下载官方sqlmap的zip文件解压缩后同python一样配置环境变量我这里这个复杂的文件名就是sqlmap.zip解压后的那个文件夹在cmd中输入sqlmap.py显示版本信息表示安装成功 burpsuite配置sqlmap插件下载sqlmap.jar扩展包链接：http://pan.baidu.com/s/1skDVwq5 密码：ce5f倘若失效请在下方评论 正式配置点击burp第一栏的extender–&gt;add–&gt;select file.选择你下好的sqlmap.jar文件成功后burp第一栏出现sqlmap标签 sqlmap插件测试用burp抓包右键选择sent to sqlmap成功调入sqlmap]]></content>
