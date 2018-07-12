@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java基础复习--方法重载]]></title>
+    <url>%2F2018%2F07%2F12%2F2018-07-12-JavaOverride%2F</url>
+    <content type="text"><![CDATA[Java基础复习–方法重载重载的定义重载就是重新载入，简单来讲，同一个函数名针对传入不同的参数，来执行不同的动作。这里不同的参数不同指的是参数种类，个数，顺序不一样。重载是多态性的一种体现。 重载的作用同一个函数执行不同的动作。比如一个函数需要进行两个数加和操作并输出，此时你并不清楚传入参数的类型，可能是整型也可能是浮点型。此时就需要根据传入参数的类型的不同来执行不同的动作，但这两个动作的函数名是一样的 重载的要求要求名一样，参数必须不一样。上一篇博客讲的构造器是典型的重载 重载与重写重载与重写是截然不同的两个概念重写通常出现在类继承的时候，子类在继承父类后，可能需要对父类中的一些已经定义好的方法进行一定的修改，此时就是函数的重写。用@Override注释来标记。重写的方法和被重写的方法必须具有相同方法名称、参数列表和返回类型。 举个简单的例子，父类动物类中定义了吃这个方法，子类狗继承了父类动物类后，可能会将吃这个动作描绘地更加具体，这就是函数的重写。 重载的实例创建一个类，为该类定义三个构造函数，分别执行下列操作：1、传递两个整数值并找出其中较大的一个值2、传递三个double值并求出其乘积3、传递两个字符串值并检查其是否相同4、在main方法中测试构造函数的调用 12345678910111213141516171819202122public class Train13 &#123; public int algorithm(int a,int b)&#123; return a&gt;b?a:b;//返回较大的值 &#125; public double algorithm(double a,double b,double c)&#123; return a*b*c; &#125; public boolean algorithm(String a,String b)&#123; return a.equals(b);//返回布尔值，相同为真，不同为假 &#125; public static void main(String[] args)&#123; Train13 t = new Train13(); int a = t.algorithm(2,3); System.out.println(&quot;a:&quot;+a); double b = t.algorithm(13.0,11.1,19.2); System.out.println(&quot;b:&quot;+b); System.out.println(t.algorithm(&quot;sdf&quot;,&quot;sdf&quot;)); &#125;&#125; 控制台输出： 123a:3b:2770.5599999999995true 成功实现函数的重载]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java基础复习--构造器]]></title>
-    <url>%2F2018%2F07%2F11%2F2018-07-11-Java%20Construction%20method%2F</url>
+    <url>%2F2018%2F07%2F11%2F2018-07-11-JavaConstructor%2F</url>
     <content type="text"><![CDATA[Java基础复习–构造器前段时间有密集的考试，所以没来得及更新博客，我最近在公司参加实训,前期的主要内容是Java，正好趁这个机会将Java的基础知识再整合一下 构造器定义构造器，又叫构造方法，是创建对象必须调用的一个方法，如果该方法不能被成功调用则对象无法创建。（如果在类中我们没有显性的定义构造方法，java会自动为我们创建一个空的无参数的构造方法） 构造器的作用1.创建对象2.给对象属性进行赋值（初始化） 构造器的语法eg： 12345class Student&#123; public Student()&#123; //这是一个构造器 &#125;&#125; 构造器语法定义： 访问修饰符 类名(){} 下面将用具体的例子展示构造器初始化功能 1234567891011121314151617181920212223242526272829public class Animal &#123; public String name; public String color; public double weight; public String desc; public Animal()&#123;//构造方法1 name = &quot;小猫&quot;; color = &quot;黑色&quot;; weight = 5.5; desc = &quot;一只来自北方的小猫&quot;; &#125; public Animal(String a,String b,double c,String desc)&#123; //构造方法2 //构造器的语法没有返回类型 //如果用户不提供构造器则系统默认提供一个无参的构造器 name = a; color = b; weight = c; this.desc = desc; &#125; public static void main(String[] args)&#123; Animal a1 = new Animal(); Animal a2 = new Animal(&quot;小狗&quot;,&quot;黄色&quot;,5.6,&quot;我是一只来自南方的小狗&quot;); &#125;&#125; 在上面的实例中对象a1调用的是构造方法1，对象a2调用的是构造方法2，分别表示了不带参数的构造方法，和带参数的构造方法，前者将属性的初值直接写在构造器中这个过程是静态的也就是直接写死的，后者可以在调用构造函数的时候动态地赋初值。 注意：在构造函数2中，第四个参数desc 123456public Animal(String a,String b,double c,String desc)&#123; name = a; color = b; weight = c; this.desc = desc; &#125; 这里用到了this，原因是形参与类的属性名恰好相同，如果此时将赋值语句写成这样 1desc = desc; 计算机不能知道你所指的desc到底是类的属性还是形参，所以此时需要用this.desc来唯一的指定类的desc属性]]></content>
       <categories>
         <category>Java</category>
