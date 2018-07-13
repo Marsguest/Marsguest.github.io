@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java基础复习--多态]]></title>
+    <url>%2F2018%2F07%2F13%2F2018-07-13-JavaPolymorphic%2F</url>
+    <content type="text"><![CDATA[Java基础复习–多态何为多态简言之就是父类定义，子类实现。比如动物都有吃这个动作，但不同的动物吃的动作的具体细节是不同的，因此其他具体的动物比如狗或者猫在继承了动物这个父类后，可以对吃方法进行重写，猫吃鱼狗吃肉，让吃这个动作有了不同的表现形式，这就是多态。 实现多态的技术成为：动态绑定（dynamic binding），是指在执行期间判断所引用对象的实际类型，根据其实际的类型调用其相应的方法。看完定义可能并不能很好的理解多态到底是什么，通过下面的实例我们将更加深入的理解。 多态的实例采用多态定义时所有信息都是属于父类信息！一旦子类重写父类方法则调用子类的方法 注意是方法而不是属性，属性还是父类的。eg： 12345678910111213141516171819202122动物类public class Animal &#123; public String name = &quot;动物&quot;; public void eat()&#123; System.out.println(&quot;动物进食&quot;); &#125;&#125;狗类public class Dog extends Animal &#123; public String name = &quot;狗&quot;; @Override public void eat()&#123; System.out.println(&quot;狗吃骨头&quot;); &#125;&#125;测试类public class Test &#123; public static void main(String[] args) &#123; Animal a = new Dog(); &#125;&#125; 此时a.name是“动物” 而a.eat()输出“狗吃骨头”，这就印证了上面的一句话采用多态定义时所有信息都是属于父类信息，只有重写的方法才会调用子类的方法。如果子类对属性进行了重新赋值，这个赋值过程是没有用的，实例出的对象的所有信息还是父类Animal的。 多态的意义下面重点写一下为何要Animal a = new Dog();这样实例化对象增加程序的灵活性如果在其他类中有这样的一个方法，想要展示动物吃这个动作如果写特定的动物的话，方法个数过于多 1234567public void showEat(Cat a)&#123; a.eat();&#125;public void showEat(Dog a)&#123; a.eat();&#125;..... 而如果Animal a = new Dog();这样实例对象的话，方法可以这样写： 123public void showEat(Animal a)&#123; a.eat();&#125; 增强代码复用性，并且更加高效。只需要写这样的一个函数就能传入不同的动物，展示不同种动物的吃的动作。这就是多态的意义。 多态的实现方式1.重写：上述的Animal类以及之后的Dog类就是重写的体现，这里不再赘述 2.接口 3.抽象类和抽象方法 关于接口和抽象类的具体内容我会在后续的博客中写出]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java基础复习--方法重载]]></title>
     <url>%2F2018%2F07%2F12%2F2018-07-12-JavaOverride%2F</url>
     <content type="text"><![CDATA[Java基础复习–方法重载重载的定义重载就是重新载入，简单来讲，同一个函数名针对传入不同的参数，来执行不同的动作。这里不同的参数不同指的是参数种类，个数，顺序不一样。 重载的作用同一个函数执行不同的动作。比如一个函数需要进行两个数加和操作并输出，此时你并不清楚传入参数的类型，可能是整型也可能是浮点型。此时就需要根据传入参数的类型的不同来执行不同的动作，但这两个动作的函数名是一样的 重载的要求要求名一样，参数必须不一样。上一篇博客讲的构造器是典型的重载 重载与重写重载与重写是截然不同的两个概念重写通常出现在类继承的时候，子类在继承父类后，可能需要对父类中的一些已经定义好的方法进行一定的修改，此时就是函数的重写。用@Override注释来标记。重写的方法和被重写的方法必须具有相同方法名称、参数列表和返回类型。 举个简单的例子，父类动物类中定义了吃这个方法，子类狗继承了父类动物类后，可能会将吃这个动作描绘地更加具体，这就是函数的重写。 重载的实例创建一个类，为该类定义三个构造函数，分别执行下列操作：1、传递两个整数值并找出其中较大的一个值2、传递三个double值并求出其乘积3、传递两个字符串值并检查其是否相同4、在main方法中测试构造函数的调用 12345678910111213141516171819202122public class Train13 &#123; public int algorithm(int a,int b)&#123; return a&gt;b?a:b;//返回较大的值 &#125; public double algorithm(double a,double b,double c)&#123; return a*b*c; &#125; public boolean algorithm(String a,String b)&#123; return a.equals(b);//返回布尔值，相同为真，不同为假 &#125; public static void main(String[] args)&#123; Train13 t = new Train13(); int a = t.algorithm(2,3); System.out.println(&quot;a:&quot;+a); double b = t.algorithm(13.0,11.1,19.2); System.out.println(&quot;b:&quot;+b); System.out.println(t.algorithm(&quot;sdf&quot;,&quot;sdf&quot;)); &#125;&#125; 控制台输出： 123a:3b:2770.5599999999995true 成功实现函数的重载]]></content>
