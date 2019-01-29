@@ -67,17 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[实验吧天网管理系统Writeup]]></title>
-    <url>%2F2018%2F05%2F01%2F2018-05-01-shiyanbaWriteup%2F</url>
-    <content type="text"><![CDATA[实验吧天网管理系统Writeup原题地址 实验吧–天网管理系统用到的知识点：1.php弱类型相等2.php函数serialize()与unserialize()（序列化和反序列化）首先查看源文件，发现提示： 12&lt;!-- $test=$_GET[&apos;username&apos;]; $test=md5($test); if($test==&apos;0&apos;) --&gt; 意思就是将输入的username的值进行md5加密，之后与0相等即可php中==是只进行值的比较，不管二者的类型。当两个字符串进行==比较的时候，则比较字符串中第一个不是数字的字符之前的数字串所代表的整数值，例如”0marsguest”与”0”就是相等的。那么下面的主要任务就是找到md5加密后是0的值，这样的例子有很多，参考链接：http://marsguest.com/2018/05/01/2018-05-01-md5-0/我这里用的是240610708，将用户名输入240610708，得到提示：访问这个界面。得到新的提示： 123456789$unserialize_str = $_POST[&apos;password&apos;]; $data_unserialize = unserialize($unserialize_str); if($data_unserialize[&apos;user&apos;] == &apos;???&apos; &amp;&amp; $data_unserialize[&apos;pass&apos;]==&apos;???&apos;) &#123; print_r($flag); &#125;伟大的科学家php方言道：成也布尔，败也布尔。回去吧骚年 简单审计一下，大意就是将password的值进行反序列化，之后得到的是一个数组，数组中user和pass的值都等于一个东西，但是具体是什么并未给出。 关于序列化和反序列化大致意思实例化的对象经过序列化serialize() 转成一个连续的字符串，将这个字符串再进行反序列化即可得到原本的对象，下面的解释直接上代码 123456789101112131415161718&lt;?php class student&#123; var $name; var $num; var $age; function student($name=&quot;null&quot;,$num=&quot;null&quot;,$age=0)&#123; $this-&gt;name = $name; $this-&gt;age = $age; $this-&gt;num = $num; &#125; function getname()&#123; return ($this-&gt;name); &#125; &#125; $student1 = new student(&quot;marsguest&quot;,&quot;2016201601&quot;,20);//实例化一个对象 $serStu = serialize($student1); echo $serStu;?&gt; 最终打印出的数据： 12O:7:&quot;student&quot;:3:&#123;s:4:&quot;name&quot;;s:9:&quot;marsguest&quot;;s:3:&quot;num&quot;;s:10:&quot;2016201601&quot;;s:3:&quot;age&quot;;i:20;&#125; O表示object ， s表示string ， i 表示int ， 数字表示对应字段的长度.（还有b表示bool，a表示array，后面会用到）注意： 布尔和整型数不用写长度，直接跟值即可下面我们将$serStu反序列化； 123unset($student1);//释放student1这个对象$newStu = unserialize($serStu);echo $newStu-&gt;getname(); 成功打印出student1的名字marsguest ok，言归正传，我们最后是要构造password，这个password经过反序列化后是存有user和pass两个键的数组，之后将user和pass对应的值与一个东西相等，这里还有一个重要提示伟大的科学家php方言道：成也布尔，败也布尔。回去吧骚年 bool类型的true跟任意字符串可以弱类型相等，于是构造password 1a:2:&#123;s:4:&quot;user&quot;;b:1;s:4:&quot;pass&quot;;b:1;&#125; 成功拿到flag]]></content>
-      <categories>
-        <category>Writeup</category>
-      </categories>
-      <tags>
-        <tag>Writeup</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[md5加密后开头是0的值总结]]></title>
     <url>%2F2018%2F05%2F01%2F2018-05-01-md5-0%2F</url>
     <content type="text"><![CDATA[md5加密后开头是0的值总结常用的： 240610708，aabg7XSs，aabC9RqS s878926199a0e545993274517709034328855841020s155964671a0e342768416822451524974117254469s214587387a0e848240448830537924465865611904s214587387a0e848240448830537924465865611904s878926199a0e545993274517709034328855841020s1091221200a0e940624217856561557816327384675s1885207154a0e509367213418206700842008763514s1502113478a0e861580163291561247404381396064s1885207154a0e509367213418206700842008763514s1836677006a0e481036490867661113260034900752s155964671a0e342768416822451524974117254469s1184209335a0e072485820392773389523109082030s1665632922a0e731198061491163073197128363787s1502113478a0e861580163291561247404381396064s1836677006a0e481036490867661113260034900752s1091221200a0e940624217856561557816327384675s155964671a0e342768416822451524974117254469s1502113478a0e861580163291561247404381396064s155964671a0e342768416822451524974117254469s1665632922a0e731198061491163073197128363787s155964671a0e342768416822451524974117254469s1091221200a0e940624217856561557816327384675s1836677006a0e481036490867661113260034900752s1885207154a0e509367213418206700842008763514s532378020a0e220463095855511507588041205815s878926199a0e545993274517709034328855841020s1091221200a0e940624217856561557816327384675s214587387a0e848240448830537924465865611904s1502113478a0e861580163291561247404381396064s1091221200a0e940624217856561557816327384675s1665632922a0e731198061491163073197128363787s1885207154a0e509367213418206700842008763514s1836677006a0e481036490867661113260034900752s1665632922a0e731198061491163073197128363787s878926199a0e545993274517709034328855841020]]></content>
@@ -86,6 +75,17 @@
       </categories>
       <tags>
         <tag>md5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[实验吧天网管理系统Writeup]]></title>
+    <url>%2F2018%2F05%2F01%2F2018-05-01-shiyanbaWriteup%2F</url>
+    <content type="text"><![CDATA[实验吧天网管理系统Writeup原题地址 实验吧–天网管理系统用到的知识点：1.php弱类型相等2.php函数serialize()与unserialize()（序列化和反序列化）首先查看源文件，发现提示： 12&lt;!-- $test=$_GET[&apos;username&apos;]; $test=md5($test); if($test==&apos;0&apos;) --&gt; 意思就是将输入的username的值进行md5加密，之后与0相等即可php中==是只进行值的比较，不管二者的类型。当两个字符串进行==比较的时候，则比较字符串中第一个不是数字的字符之前的数字串所代表的整数值，例如”0marsguest”与”0”就是相等的。那么下面的主要任务就是找到md5加密后是0的值，这样的例子有很多，参考链接：http://marsguest.com/2018/05/01/2018-05-01-md5-0/我这里用的是240610708，将用户名输入240610708，得到提示：访问这个界面。得到新的提示： 123456789$unserialize_str = $_POST[&apos;password&apos;]; $data_unserialize = unserialize($unserialize_str); if($data_unserialize[&apos;user&apos;] == &apos;???&apos; &amp;&amp; $data_unserialize[&apos;pass&apos;]==&apos;???&apos;) &#123; print_r($flag); &#125;伟大的科学家php方言道：成也布尔，败也布尔。回去吧骚年 简单审计一下，大意就是将password的值进行反序列化，之后得到的是一个数组，数组中user和pass的值都等于一个东西，但是具体是什么并未给出。 关于序列化和反序列化大致意思实例化的对象经过序列化serialize() 转成一个连续的字符串，将这个字符串再进行反序列化即可得到原本的对象，下面的解释直接上代码 123456789101112131415161718&lt;?php class student&#123; var $name; var $num; var $age; function student($name=&quot;null&quot;,$num=&quot;null&quot;,$age=0)&#123; $this-&gt;name = $name; $this-&gt;age = $age; $this-&gt;num = $num; &#125; function getname()&#123; return ($this-&gt;name); &#125; &#125; $student1 = new student(&quot;marsguest&quot;,&quot;2016201601&quot;,20);//实例化一个对象 $serStu = serialize($student1); echo $serStu;?&gt; 最终打印出的数据： 12O:7:&quot;student&quot;:3:&#123;s:4:&quot;name&quot;;s:9:&quot;marsguest&quot;;s:3:&quot;num&quot;;s:10:&quot;2016201601&quot;;s:3:&quot;age&quot;;i:20;&#125; O表示object ， s表示string ， i 表示int ， 数字表示对应字段的长度.（还有b表示bool，a表示array，后面会用到）注意： 布尔和整型数不用写长度，直接跟值即可下面我们将$serStu反序列化； 123unset($student1);//释放student1这个对象$newStu = unserialize($serStu);echo $newStu-&gt;getname(); 成功打印出student1的名字marsguest ok，言归正传，我们最后是要构造password，这个password经过反序列化后是存有user和pass两个键的数组，之后将user和pass对应的值与一个东西相等，这里还有一个重要提示伟大的科学家php方言道：成也布尔，败也布尔。回去吧骚年 bool类型的true跟任意字符串可以弱类型相等，于是构造password 1a:2:&#123;s:4:&quot;user&quot;;b:1;s:4:&quot;pass&quot;;b:1;&#125; 成功拿到flag]]></content>
+      <categories>
+        <category>Writeup</category>
+      </categories>
+      <tags>
+        <tag>Writeup</tag>
       </tags>
   </entry>
   <entry>
